@@ -24,9 +24,9 @@ struct WebView: UIViewRepresentable {
 }
 
 @available(iOS 13.0, *)
-extension String {
-    func generatePreview() -> WebView {
-        .init(content: self)
+public extension String {
+    func generatePreview() -> some View {
+        WebView(content: self)
     }
 }
 #endif
@@ -54,9 +54,9 @@ struct WebView: NSViewRepresentable {
 }
 
 @available(macOS 10.15, *)
-extension String {
-    func generatePreview() -> WebView {
-        .init(content: self)
+public extension String {
+    func generatePreview() -> some View {
+        WebView(content: self)
     }
 }
 #endif
