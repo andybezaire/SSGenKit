@@ -10,10 +10,3 @@ final class WebPageTests: XCTestCase {
         XCTAssertTrue(html.contains("<!DOCTYPE html>"))
     }
 }
-
-// MARK: - move to production
-public struct WebPage {
-    public func htmlDocument() -> String {
-        return "<!DOCTYPE html>"
-    }
-}
