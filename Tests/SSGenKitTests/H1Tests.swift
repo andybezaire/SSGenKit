@@ -30,33 +30,3 @@ final class H1Tests: XCTestCase {
 
     private func uniqueString() -> String { UUID().uuidString }
 }
-
-// MARK: - move to production
-struct H1 { 
-    private let content: () -> String
-
-    init(content: @escaping () -> String) {
-        self.content = content
-    }
-}
-
-extension H1: CustomStringConvertible {
-    var description: String {
-        """
-<h1>
-\(content())
-</h1>
-"""
-    }
-}
-
-//let k = H1 {
-//    "Thgis is the H1 contents"
-//}
-// print(k)
-//
-//"""
-//"<h1>
-//  Thgis is the H1 contents
-//</h1>
-//"""
