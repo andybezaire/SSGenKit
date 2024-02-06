@@ -19,7 +19,7 @@ final class WebPageTests: XCTestCase {
         let openIndex = try XCTUnwrap(html.index(of: "<html>"))
         let closeIndex = try XCTUnwrap(html.index(of: "</html>"))
 
-        XCTAssertTrue(openIndex < closeIndex)
+        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
     }
 
     func test_htmlDocument_containsDoctypeBeforeHTMLTag() throws {
@@ -30,10 +30,10 @@ final class WebPageTests: XCTestCase {
         let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"))
         let htmlIndex = try XCTUnwrap(html.index(of: "<html>"))
 
-        XCTAssertTrue(doctypeIndex < htmlIndex)
+        XCTAssertTrue(doctypeIndex < htmlIndex, "doctype should be before html open")
     }
 
-    func test_noContent_htmlDocument_containsEmptyBody() throws {
+    func test_noContent_htmlDocument_containsBodyTag() throws {
         let sut = makeSUT()
 
         let html = sut.htmlDocument()
