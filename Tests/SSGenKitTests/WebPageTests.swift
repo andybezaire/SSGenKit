@@ -31,6 +31,21 @@ final class WebPageTests: XCTestCase {
 
         XCTAssertTrue(doctypeIndex < htmlIndex)
     }
+
+    func test_noContent_htmlDocument_containsEmptyBody() throws {
+        let sut = WebPage()
+
+        let html = sut.htmlDocument()
+
+        let openIndex = try XCTUnwrap(html.index(of: "<body>"))
+        let closeIndex = try XCTUnwrap(html.index(of: "</body>"))
+        let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
+        let htmlCloseIndex = try XCTUnwrap(html.index(of: "</html>"))
+
+        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
+        XCTAssertTrue(htmlOpenIndex < openIndex, "html open should be before tag open")
+        XCTAssertTrue(closeIndex < htmlCloseIndex, "tag close should be before html open")
+    }
 }
 
 extension StringProtocol {

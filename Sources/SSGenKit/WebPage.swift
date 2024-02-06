@@ -5,6 +5,8 @@ public struct WebPage {
         return """
 <!DOCTYPE html>
 <html>
+  <body>
+  </body>
 </html>
 """
     }
