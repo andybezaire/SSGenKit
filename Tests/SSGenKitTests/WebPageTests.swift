@@ -48,7 +48,7 @@ final class WebPageTests: XCTestCase {
     }
 }
 
-extension StringProtocol {
+private extension StringProtocol {
     func index<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
         range(of: string, options: options)?.lowerBound
     }
