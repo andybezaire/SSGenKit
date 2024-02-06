@@ -24,7 +24,7 @@ final class H1Tests: XCTestCase {
 
     // MARK: - helpers
     private func makeSUT(content: String = "") -> H1 {
-        let element = H1(content: content)
+        let element = H1 { content }
         return element
     }
 
@@ -33,9 +33,9 @@ final class H1Tests: XCTestCase {
 
 // MARK: - move to production
 struct H1 { 
-    private let content: String
+    private let content: () -> String
 
-    init(content: String) {
+    init(content: @escaping () -> String) {
         self.content = content
     }
 }
@@ -44,7 +44,7 @@ extension H1: CustomStringConvertible {
     var description: String {
         """
 <h1>
-\(content)
+\(content())
 </h1>
 """
     }
