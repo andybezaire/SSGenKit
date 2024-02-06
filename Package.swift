@@ -7,13 +7,15 @@ let package = Package(
     products: [
         .library(
             name: "SSGenKit",
-            targets: ["SSGenKit"]),
+            targets: ["SSGenKit"]
+        ),
     ],
     targets: [
         .target(
             name: "SSGenKit"),
         .testTarget(
             name: "SSGenKitTests",
-            dependencies: ["SSGenKit"]),
+            dependencies: ["SSGenKit"]
+        ),
     ]
 )
