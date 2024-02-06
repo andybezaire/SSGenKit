@@ -1,4 +1,4 @@
-import Foundation
+import XCTest
 
 extension StringProtocol {
     func index<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> Index? {
@@ -22,4 +22,8 @@ extension StringProtocol {
         }
         return result
     }
+}
+
+extension XCTestCase {
+    func uniqueString() -> String { UUID().uuidString }
 }

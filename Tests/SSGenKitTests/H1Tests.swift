@@ -27,6 +27,4 @@ final class H1Tests: XCTestCase {
         let element = H1 { content }
         return element
     }
-
-    private func uniqueString() -> String { UUID().uuidString }
 }

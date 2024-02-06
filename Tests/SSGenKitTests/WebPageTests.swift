@@ -71,5 +71,4 @@ final class WebPageTests: XCTestCase {
         let webPage = WebPage(content: content)
         return webPage
     }
-    private func uniqueString() -> String { UUID().uuidString }
 }
