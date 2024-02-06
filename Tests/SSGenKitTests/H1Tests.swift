@@ -14,12 +14,12 @@ final class H1Tests: XCTestCase {
     }
 
     func test_printing_containsContent() throws {
-        let content = "A random string"
+        let content = uniqueString()
         let sut = makeSUT(content: content)
 
         let html = "\(sut)"
 
-        XCTAssertTrue(html.contains(content))
+        XCTAssertTrue(html.contains(content), "html: \(html) should contain \(content)")
     }
 
     // MARK: - helpers
@@ -27,19 +27,24 @@ final class H1Tests: XCTestCase {
         let element = H1(content: content)
         return element
     }
+
+    private func uniqueString() -> String { UUID().uuidString }
 }
 
 // MARK: - move to production
 struct H1 { 
-    init(content: String) {
+    private let content: String
 
+    init(content: String) {
+        self.content = content
     }
 }
 
 extension H1: CustomStringConvertible {
     var description: String {
         """
-<h1>A random string
+<h1>
+\(content)
 </h1>
 """
     }
