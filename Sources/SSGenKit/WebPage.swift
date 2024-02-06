@@ -4,6 +4,7 @@ public struct WebPage {
     public func htmlDocument() -> String {
         return """
 <html>
+</html>
 <!DOCTYPE html>
 """
     }
