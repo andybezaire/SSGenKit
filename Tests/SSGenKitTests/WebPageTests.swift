@@ -20,6 +20,17 @@ final class WebPageTests: XCTestCase {
 
         XCTAssertTrue(openIndex < closeIndex)
     }
+
+    func test_htmlDocument_containsDoctypeBeforeHTMLTag() throws {
+        let sut = WebPage()
+
+        let html = sut.htmlDocument()
+
+        let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"))
+        let htmlIndex = try XCTUnwrap(html.index(of: "<html>"))
+
+        XCTAssertTrue(doctypeIndex < htmlIndex)
+    }
 }
 
 extension StringProtocol {
