@@ -4,7 +4,7 @@ public struct WebPage {
     let title: String?
     let content: () -> String
 
-    public init(title: String? = nil, @ViewBuilder content: @escaping () -> String) {
+    public init(title: String? = nil, content: @escaping () -> String) {
         self.title = title
         self.content = content
     }
