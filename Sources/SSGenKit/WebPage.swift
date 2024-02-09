@@ -16,6 +16,9 @@ extension WebPage: CustomStringConvertible {
         <!DOCTYPE html>
         <html>
           \(title != nil ? "<head>" : "")
+          \(title != nil ? "<title>" : "")
+          \(title ?? "")
+          \(title != nil ? "</title>" : "")
           \(title != nil ? "</head>" : "")
           <body>
           </body>
