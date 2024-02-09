@@ -14,10 +14,11 @@ extension WebPage: CustomStringConvertible {
     public var description: String {
         """
         <!DOCTYPE html>
-        <html>
-          \(title.map { title in "\(Head { Title(title) })" } ?? "")
-          <body>
-          </body>
+        \( HTML { """
+                  \(title.map { title in "\(Head { Title(title) })" } ?? "")
+                  <body>
+                  </body>
+        """ })
         </html>
         """
     }
@@ -43,6 +44,18 @@ private struct Head: CustomStringConvertible {
         <head>
           \(content())
         </head>
+        """
+    }
+}
+
+private struct HTML: CustomStringConvertible {
+    let content: () -> CustomStringConvertible
+
+    var description: String {
+        """
+        <html>
+          \(content())
+        </html>
         """
     }
 }
