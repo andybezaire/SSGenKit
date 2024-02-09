@@ -16,9 +16,7 @@ extension WebPage: CustomStringConvertible {
         <!DOCTYPE html>
         <html>
           \(title != nil ? "<head>" : "")
-          \(title != nil ? "<title>" : "")
-          \(title ?? "")
-          \(title != nil ? "</title>" : "")
+          \(title.map { "\(Title($0))" } ?? "")
           \(title != nil ? "</head>" : "")
           <body>
           </body>
@@ -26,3 +24,27 @@ extension WebPage: CustomStringConvertible {
         """
     }
 }
+
+private struct Title: CustomStringConvertible {
+    let title: String
+
+    init(_ title: String) {
+        self.title = title
+    }
+
+    var description: String {
+        "<title>\(title)</title>"
+    }
+}
+
+//private struct Head: CustomStringConvertible {
+//    let content: () -> CustomStringConvertible
+//
+//    var description: String {
+//        """
+//        <head>
+//          \(content())
+//        </head>
+//        """
+//    }
+//}
