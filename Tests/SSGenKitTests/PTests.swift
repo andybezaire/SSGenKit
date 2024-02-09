@@ -22,14 +22,9 @@ final class PTests: XCTestCase {
         XCTAssertTrue(html.contains(content), "html: \(html) should contain \(content)")
     }
 
-//    func test_init_doesNotExecuteContent() throws {
-//        let content = uniqueString()
-//        let sut = makeSUT(content: content)
-//
-//        let html = "\(sut)"
-//
-//        XCTAssertTrue(html.contains(content), "html: \(html) should contain \(content)")
-//    }
+    func test_init_doesNotExecuteContent() throws {
+        _ = makeSUT(content: { XCTFail() ; return "" })
+    }
 
     // MARK: - helpers
     private func makeSUT(content: @escaping () -> String = { "" }) -> P {
