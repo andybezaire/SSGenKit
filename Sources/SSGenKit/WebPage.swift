@@ -13,9 +13,10 @@ public struct WebPage {
 extension WebPage: CustomStringConvertible {
     public var description: String {
         """
-        \(title != nil ? "<head>" : "")
         <!DOCTYPE html>
         <html>
+          \(title != nil ? "<head>" : "")
+          \(title != nil ? "</head>" : "")
           <body>
           </body>
         </html>

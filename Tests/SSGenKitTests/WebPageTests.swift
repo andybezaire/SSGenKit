@@ -57,20 +57,20 @@ final class WebPageTests: XCTestCase {
         XCTAssertNil(html.index(of: "</head>"))
     }
 
-//    func test_headContent_printing_containsHeadTag() throws {
-//        let sut = makeSUT(headContent: [.title(uniqueString())])
-//
-//        let html = "\(sut)"
-//
-//        let openIndex = try XCTUnwrap(html.index(of: "<head>"))
-//        let closeIndex = try XCTUnwrap(html.index(of: "</head>"))
-//        let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
-//        let htmlCloseIndex = try XCTUnwrap(html.index(of: "</html>"))
-//
-//        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
-//        XCTAssertTrue(htmlOpenIndex < openIndex, "html open should be before tag open")
-//        XCTAssertTrue(closeIndex < htmlCloseIndex, "tag close should be before html close")
-//    }
+    func test_headContent_printing_containsHeadTag() throws {
+        let sut = makeSUT(headContent: .init(title: uniqueString()))
+
+        let html = "\(sut)"
+
+        let openIndex = try XCTUnwrap(html.index(of: "<head>"))
+        let closeIndex = try XCTUnwrap(html.index(of: "</head>"))
+        let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
+        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body>"))
+
+        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
+        XCTAssertTrue(htmlOpenIndex < openIndex, "tag open should be after html open")
+        XCTAssertTrue(closeIndex < bodyOpenIndex, "tag close should be before body open")
+    }
 
     // MARK: - helpers
     private func makeSUT(
@@ -82,7 +82,7 @@ final class WebPageTests: XCTestCase {
         } else {
             WebPage(content: content)
         }
-        
+
         return sut
     }
 
