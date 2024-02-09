@@ -6,7 +6,7 @@ final class WebPageTests: XCTestCase {
     func test_htmlDocument_containsDoctype() throws {
         let sut = makeSUT()
 
-        let html = sut.htmlDocument()
+        let html = "\(sut)"
 
         XCTAssertTrue(html.contains("<!DOCTYPE html>"))
     }
@@ -14,7 +14,7 @@ final class WebPageTests: XCTestCase {
     func test_htmlDocument_containsHTMLTag() throws {
         let sut = makeSUT()
 
-        let html = sut.htmlDocument()
+        let html = "\(sut)"
 
         let openIndex = try XCTUnwrap(html.index(of: "<html>"))
         let closeIndex = try XCTUnwrap(html.index(of: "</html>"))
@@ -25,7 +25,7 @@ final class WebPageTests: XCTestCase {
     func test_htmlDocument_containsDoctypeBeforeHTMLTag() throws {
         let sut = makeSUT()
 
-        let html = sut.htmlDocument()
+        let html = "\(sut)"
 
         let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"))
         let htmlIndex = try XCTUnwrap(html.index(of: "<html>"))
@@ -36,7 +36,7 @@ final class WebPageTests: XCTestCase {
     func test_noContent_htmlDocument_containsBodyTag() throws {
         let sut = makeSUT()
 
-        let html = sut.htmlDocument()
+        let html = "\(sut)"
 
         let openIndex = try XCTUnwrap(html.index(of: "<body>"))
         let closeIndex = try XCTUnwrap(html.index(of: "</body>"))

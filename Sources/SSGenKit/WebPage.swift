@@ -16,3 +16,15 @@ public struct WebPage {
 """
     }
 }
+
+extension WebPage: CustomStringConvertible {
+    public var description: String {
+        """
+        <!DOCTYPE html>
+        <html>
+          <body>
+          </body>
+        </html>
+        """
+    }
+}
