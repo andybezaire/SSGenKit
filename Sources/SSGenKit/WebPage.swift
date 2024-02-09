@@ -15,9 +15,7 @@ extension WebPage: CustomStringConvertible {
         """
         <!DOCTYPE html>
         <html>
-          \(title != nil ? "<head>" : "")
-          \(title.map { "\(Title($0))" } ?? "")
-          \(title != nil ? "</head>" : "")
+          \(title.map { title in "\(Head { Title(title) })" } ?? "")
           <body>
           </body>
         </html>
@@ -37,14 +35,14 @@ private struct Title: CustomStringConvertible {
     }
 }
 
-//private struct Head: CustomStringConvertible {
-//    let content: () -> CustomStringConvertible
-//
-//    var description: String {
-//        """
-//        <head>
-//          \(content())
-//        </head>
-//        """
-//    }
-//}
+private struct Head: CustomStringConvertible {
+    let content: () -> CustomStringConvertible
+
+    var description: String {
+        """
+        <head>
+          \(content())
+        </head>
+        """
+    }
+}
