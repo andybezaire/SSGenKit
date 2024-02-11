@@ -9,9 +9,21 @@ let package = Package(
         .library(name: "SSGenKit", targets: ["SSGenKit"]),
         .library(name: "SSGenKitExtensions", targets: ["SSGenKitExtensions"]),
     ],
+    dependencies: [
+      .package(
+        url: "https://github.com/pointfreeco/swift-snapshot-testing",
+        from: "1.12.0"
+      ),
+    ],
     targets: [
         .target(name: "SSGenKit"),
-        .testTarget(name: "SSGenKitTests", dependencies: ["SSGenKit"]),
+        .testTarget(
+            name: "SSGenKitTests",
+            dependencies: [
+                "SSGenKit",
+                .product(name: "InlineSnapshotTesting", package: "swift-snapshot-testing"),
+            ]
+        ),
         .target(name: "SSGenKitExtensions"),
     ]
 )
