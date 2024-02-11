@@ -1,6 +1,5 @@
 import XCTest
 import SSGenKit
-import SwiftUI
 
 final class WebPageTests: XCTestCase {
     func test_printing_containsDoctype() throws {
@@ -95,7 +94,7 @@ final class WebPageTests: XCTestCase {
     // MARK: - helpers
     private func makeSUT(
         headContent: HeadContent? = nil,
-        @ViewBuilder content: @escaping () -> String = { "" }
+        content: @escaping () -> String = { "" }
     ) -> WebPage {
         let sut = if let title = headContent?.title {
             WebPage(title: title, content: content)
