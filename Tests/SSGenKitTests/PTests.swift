@@ -1,5 +1,6 @@
 import XCTest
 import SSGenKit
+import InlineSnapshotTesting
 
 final class PTests: XCTestCase {
     func test_noContent_printing_containsTag() throws {
@@ -26,6 +27,20 @@ final class PTests: XCTestCase {
         _ = makeSUT(content: { XCTFail() ; return "" })
     }
 
+    func test_matchesSnapshot() {
+        let sut = makeSUT(content: { "This is a p tag." })
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <p>
+              This is a p tag.
+            </p>
+            """
+        }
+    }
+
     // MARK: - helpers
     private func makeSUT(content: @escaping () -> String = { "" }) -> P {
         let element = P(content: content)
@@ -45,9 +60,9 @@ public struct P {
 extension P: CustomStringConvertible {
     public var description: String {
         """
-<p>
-\(content())
-</p>
-"""
+        <p>
+          \(content())
+        </p>
+        """
     }
 }
