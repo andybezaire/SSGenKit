@@ -1,17 +1,19 @@
-public struct H1 {
+public struct Title: CustomStringConvertible {
     private let content: () -> String
 
     public init(content: @escaping () -> String) {
         self.content = content
     }
-}
 
-extension H1: CustomStringConvertible {
+    public init(_ title: String) {
+        self.init(content: { title })
+    }
+
     public var description: String {
         """
-        <h1>
+        <title>
           \(content())
-        </h1>
+        </title>
         """
     }
 }

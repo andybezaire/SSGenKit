@@ -2,14 +2,14 @@ import XCTest
 import SSGenKit
 import InlineSnapshotTesting
 
-final class H1Tests: XCTestCase {
+final class TitleTests: XCTestCase {
     func test_noContent_printing_containsTag() throws {
         let sut = makeSUT()
 
         let html = "\(sut)"
 
-        let openIndex = try XCTUnwrap(html.index(of: "<h1>"))
-        let closeIndex = try XCTUnwrap(html.index(of: "</h1>"))
+        let openIndex = try XCTUnwrap(html.index(of: "<title>"))
+        let closeIndex = try XCTUnwrap(html.index(of: "</title>"))
 
         XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
     }
@@ -27,23 +27,32 @@ final class H1Tests: XCTestCase {
         _ = makeSUT(content: { XCTFail() ; return "" })
     }
 
+    func test_init_succeeds() {
+        let title = uniqueString()
+        let closureInit = Title(content: { title })
+
+        let sut = Title(title)
+
+        XCTAssertEqual("\(sut)", "\(closureInit)")
+    }
+
     func test_matchesSnapshot() {
-        let sut = makeSUT(content: { "This is an h1 tag." })
+        let sut = makeSUT(content: { "This is a title tag." })
 
         let html = "\(sut)"
 
         assertInlineSnapshot(of: html, as: .lines) {
             """
-            <h1>
-              This is an h1 tag.
-            </h1>
+            <title>
+              This is a title tag.
+            </title>
             """
         }
     }
 
     // MARK: - helpers
-    private func makeSUT(content: @escaping () -> String = { "" }) -> H1 {
-        let element = H1(content: content)
+    private func makeSUT(content: @escaping () -> String = { "" }) -> Title {
+        let element = Title(content: content)
         return element
     }
 }

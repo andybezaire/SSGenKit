@@ -24,18 +24,6 @@ extension WebPage: CustomStringConvertible {
     }
 }
 
-private struct Title: CustomStringConvertible {
-    let title: String
-
-    init(_ title: String) {
-        self.title = title
-    }
-
-    var description: String {
-        "<title>\(title)</title>"
-    }
-}
-
 private struct Head: CustomStringConvertible {
     let content: () -> CustomStringConvertible
 
