@@ -6,10 +6,6 @@ public struct Text: HTMLBodyElement {
     }
 
     public var description: String {
-        """
-        <p>
-          \(content)
-        </p>
-        """
+        "\(P(content: { content }))"
     }
 }
