@@ -17,33 +17,44 @@ final class FontTests: XCTestCase {
         }
     }
 
-    func test_mainHeading_matchesSnapshot() {
+    func test_font_matchesSnapshot() throws {
+        let (font, tag) = try uniqueFontPair()
         let sut = Text("Hello, World!")
-            .font(.mainHeading)
+            .font(font)
 
         let html = "\(sut)"
 
         assertInlineSnapshot(of: html, as: .lines) {
             """
-            <h1>
+            <\(tag)>
               Hello, World!
-            </h1>
+            </\(tag)>
             """
         }
     }
 
-    func test_subheading_matchesSnapshot() {
-        let sut = Text("Hello, World!")
-            .font(.subheading)
-
-        let html = "\(sut)"
-
-        assertInlineSnapshot(of: html, as: .lines) {
-            """
-            <h3>
-              Hello, World!
-            </h3>
-            """
-        }
+    // MARK: - helpers
+    private func uniqueFont() -> HTMLBodyFont {
+        HTMLBodyFont.allCases.randomElement()!
     }
+
+    private let fontPairTable: [HTMLBodyFont: String] = [
+        .mainHeading: "h1",
+        .heading: "h2",
+        .subheading: "h3",
+        .tertiaryHeading: "h4",
+        .quaternaryHeading: "h5",
+        .quinaryHeading: "h6",
+        .body: "p",
+    ]
+
+    private func uniqueFontPair() throws -> (font: HTMLBodyFont, tag: String) {
+        let font = uniqueFont()
+        guard let tag = fontPairTable[font]
+        else { throw UnimplementedFontTestError() }
+
+        return (font, tag)
+    }
+
+    private struct UnimplementedFontTestError: Error { }
 }

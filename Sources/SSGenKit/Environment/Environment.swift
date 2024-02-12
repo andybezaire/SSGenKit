@@ -7,7 +7,7 @@ private enum FontKey: EnvironmentKey {
     static let defaultValue: HTMLBodyFont = .body
 }
 
-public enum HTMLBodyFont {
+public enum HTMLBodyFont: CaseIterable {
     /// Equivalent to H1
     case mainHeading
     /// Equivalent to H2
