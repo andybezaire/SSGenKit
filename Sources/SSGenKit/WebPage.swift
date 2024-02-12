@@ -11,17 +11,17 @@ public struct WebPage {
 }
 
 extension WebPage: CustomStringConvertible {
-    public var description: String {
-        """
-        <!DOCTYPE html>
-        \( HTML { """
-                  \(title.map { title in "\(Head { Title(title) })" } ?? "")
-                  <body>
-                  </body>
-        """ })
-        </html>
-        """
-    }
+    public var description: String { return "" }
+//        """
+//        <!DOCTYPE html>
+//        \( HTML { """
+//                  \(title.map { title in "\(Head { Title(title) })" } ?? "")
+//                  <body>
+//                  </body>
+//        """ })
+//        </html>
+//        """
+//    }
 }
 
 private struct Head: CustomStringConvertible {
@@ -32,18 +32,6 @@ private struct Head: CustomStringConvertible {
         <head>
           \(content())
         </head>
-        """
-    }
-}
-
-private struct HTML: CustomStringConvertible {
-    let content: () -> CustomStringConvertible
-
-    var description: String {
-        """
-        <html>
-          \(content())
-        </html>
         """
     }
 }
