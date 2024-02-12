@@ -11,7 +11,7 @@ public struct WebPage {
 }
 
 extension WebPage: CustomStringConvertible {
-    public var description: String { return "" }
+    public var description: String { return "<!DOCTYPE html>" }
 //        """
 //        <!DOCTYPE html>
 //        \( HTML { """

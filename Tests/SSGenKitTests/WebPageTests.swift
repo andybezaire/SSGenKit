@@ -2,13 +2,13 @@ import XCTest
 import SSGenKit
 
 final class WebPageTests: XCTestCase {
-//    func test_printing_containsDoctype() throws {
-//        let sut = makeSUT()
-//
-//        let html = "\(sut)"
-//
-//        XCTAssertTrue(html.contains("<!DOCTYPE html>"))
-//    }
+    func test_printing_containsDoctype() throws {
+        let sut = makeSUT()
+
+        let html = "\(sut)"
+
+        XCTAssertTrue(html.contains("<!DOCTYPE html>"))
+    }
 
 //    func test_printing_containsDoctypeBeforeHTMLTag() throws {
 //        let sut = makeSUT()
