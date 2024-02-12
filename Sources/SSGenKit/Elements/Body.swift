@@ -1,4 +1,4 @@
-struct Body: HTMLBodyElement {
+struct Body: HTMLElement {
     private let content: () -> HTMLBodyElement
 
     init(content: @escaping () -> HTMLBodyElement) {
