@@ -1,7 +1,7 @@
 public struct P: HTMLBodyElement {
-    private let content: () -> String
+    private let content: () -> HTMLBodyElement
 
-    public init(content: @escaping () -> String) {
+    public init(content: @escaping () -> HTMLBodyElement) {
         self.content = content
     }
 }
