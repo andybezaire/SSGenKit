@@ -10,8 +10,19 @@ extension HTML: CustomStringConvertible {
     var description: String {
         """
         <html>
-          \(body())
+          \(indented: "\(body())")
         </html>
         """
+    }
+}
+
+extension DefaultStringInterpolation {
+    mutating func appendInterpolation(indented string: String) {
+       let indent = String(stringInterpolation: self).reversed().prefix { " \t".contains($0) }
+       if indent.isEmpty {
+            appendInterpolation(string)
+        } else {
+            appendLiteral(string.split(separator: "\n", omittingEmptySubsequences: false).joined(separator: "\n" + indent))
+        }
     }
 }

@@ -24,21 +24,21 @@ final class HTMLTests: XCTestCase {
         _ = makeSUT(body: { .init(content: { XCTFail() ; return "" }) })
     }
 
-//    func test_matchesSnapshot() {
-//        let sut = makeSUT(body: { .init(content: { "This is a body tag." }) })
-//
-//        let html = "\(sut)"
-//
-//        assertInlineSnapshot(of: html, as: .lines) {
-//            """
-//            <html>
-//              <body>
-//                This is the body.
-//              </body>
-//            </html>
-//            """
-//        }
-//    }
+    func test_matchesSnapshot() {
+        let sut = makeSUT(body: { .init(content: { "This is the body." }) })
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <html>
+              <body>
+                This is the body.
+              </body>
+            </html>
+            """
+        }
+    }
 
     // MARK: - helpers
     private func makeSUT(body: @escaping () -> Body) -> HTMLElement {
