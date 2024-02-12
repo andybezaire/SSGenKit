@@ -1,5 +1,5 @@
 import XCTest
-import SSGenKit
+@testable import SSGenKit
 import InlineSnapshotTesting
 
 final class PTests: XCTestCase {

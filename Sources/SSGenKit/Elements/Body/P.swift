@@ -1,13 +1,13 @@
-public struct P: HTMLBodyElement {
+struct P: HTMLBodyElement {
     private let content: () -> HTMLBodyElement
 
-    public init(content: @escaping () -> HTMLBodyElement) {
+    init(content: @escaping () -> HTMLBodyElement) {
         self.content = content
     }
 }
 
 extension P: CustomStringConvertible {
-    public var description: String {
+    var description: String {
         """
         <p>
           \(content())
