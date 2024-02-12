@@ -57,6 +57,28 @@ final class ExampleUseTests: XCTestCase {
         }
     }
 
+//    func test_titledHelloWorld_matchesSnapshot() {
+//        let sut = WebPage {
+//            Text("Hello, World!")
+//                .font(.h1)
+//        }
+//
+//        let html = "\(sut)"
+//
+//        assertInlineSnapshot(of: html, as: .lines) {
+//            """
+//            <!DOCTYPE html>
+//            <html>
+//              <body>
+//                <h1>
+//                  Hello, World!
+//                </h1>
+//              </body>
+//            </html>
+//            """
+//        }
+//    }
+
     // MARK: - helpers
     private func makeSUT(content: String = "") -> H1 {
         let element = H1 { content }

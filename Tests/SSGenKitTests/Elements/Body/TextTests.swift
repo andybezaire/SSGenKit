@@ -16,4 +16,19 @@ final class TextTests: XCTestCase {
             """
         }
     }
+
+    func test_formatted_matchesSnapshot() {
+        let sut = Text("Hello, World!")
+            .font(.mainHeading)
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <h1>
+              Hello, World!
+            </h1>
+            """
+        }
+    }
 }

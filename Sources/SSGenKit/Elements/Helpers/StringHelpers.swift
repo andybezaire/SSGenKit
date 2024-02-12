@@ -1,6 +1,6 @@
 extension String {
     enum HTMLTag: String {
-        case html, body, p
+        case html, body, p, h1, h2, h3, h4, h5, h6
     }
 
     init(tag: HTMLTag, content: () -> HTMLElement) {
