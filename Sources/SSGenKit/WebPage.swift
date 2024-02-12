@@ -2,9 +2,9 @@ import SwiftUI
 
 public struct WebPage {
     let title: String?
-    let content: () -> String
+    let content: () -> HTMLBodyElement
 
-    public init(title: String? = nil, content: @escaping () -> String) {
+    public init(title: String? = nil, content: @escaping () -> HTMLBodyElement) {
         self.title = title
         self.content = content
     }
