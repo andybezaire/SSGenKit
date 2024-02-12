@@ -42,7 +42,7 @@ final class PTests: XCTestCase {
     }
 
     // MARK: - helpers
-    private func makeSUT(content: @escaping () -> String = { "" }) -> P {
+    private func makeSUT(content: @escaping () -> String = { "" }) -> HTMLBodyElement {
         let element = P(content: content)
         return element
     }

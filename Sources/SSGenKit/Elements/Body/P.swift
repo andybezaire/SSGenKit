@@ -1,4 +1,4 @@
-public struct P {
+public struct P: HTMLBodyElement {
     private let content: () -> String
 
     public init(content: @escaping () -> String) {
