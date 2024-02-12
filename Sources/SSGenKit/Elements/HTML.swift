@@ -7,13 +7,7 @@ struct HTML: HTMLElement {
 }
 
 extension HTML: CustomStringConvertible {
-    var description: String {
-        """
-        <html>
-          \(indented: "\(body())")
-        </html>
-        """
-    }
+    var description: String { String(tag: .html, content: body) }
 }
 
 extension DefaultStringInterpolation {
@@ -24,5 +18,19 @@ extension DefaultStringInterpolation {
         } else {
             appendLiteral(string.split(separator: "\n", omittingEmptySubsequences: false).joined(separator: "\n" + indent))
         }
+    }
+}
+
+extension String {
+    enum HTMLTag {
+        case html
+    }
+    
+    init(tag: HTMLTag, content: () -> HTMLElement) {
+        self = """
+               <html>
+                 \(indented: "\(content())")
+               </html>
+               """
     }
 }
