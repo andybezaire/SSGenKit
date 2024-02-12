@@ -1,13 +1,13 @@
 extension String {
-    enum HTMLTag {
-        case html
+    enum HTMLTag: String {
+        case html, body, p
     }
 
     init(tag: HTMLTag, content: () -> HTMLElement) {
         self = """
-               <html>
+               <\(tag.rawValue)>
                  \(indented: "\(content())")
-               </html>
+               </\(tag.rawValue)>
                """
     }
 }

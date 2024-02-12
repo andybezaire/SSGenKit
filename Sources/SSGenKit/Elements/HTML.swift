@@ -7,5 +7,5 @@ struct HTML: HTMLElement {
 }
 
 extension HTML: CustomStringConvertible {
-    var description: String { String(tag: .html, content: body) }
+    var description: String { .init(tag: .html, content: body) }
 }

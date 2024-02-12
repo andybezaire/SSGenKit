@@ -6,6 +6,6 @@ public struct Text: HTMLBodyElement {
     }
 
     public var description: String {
-        "\(P(content: { content }))"
+        .init(tag: .p, content: { content })
     }
 }

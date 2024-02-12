@@ -7,11 +7,5 @@ struct Body: HTMLElement {
 }
 
 extension Body: CustomStringConvertible {
-    var description: String {
-        """
-        <body>
-          \(content())
-        </body>
-        """
-    }
+    var description: String { .init(tag: .body, content: content) }
 }
