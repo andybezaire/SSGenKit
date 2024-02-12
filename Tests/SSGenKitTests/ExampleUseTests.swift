@@ -36,26 +36,26 @@ final class ExampleUseTests: XCTestCase {
         XCTAssertTrue(html.contains(content), "html: \(html) should contain \(content)")
     }
 
-//    func test_helloWorld_matchesSnapshot() {
-//        let sut = WebPage {
-//            Text("Hello, World!")
-//        }
-//
-//        let html = "\(sut)"
-//
-//        assertInlineSnapshot(of: html, as: .lines) {
-//            """
-//            <!DOCTYPE html>
-//            <html>
-//              <body>
-//                <p>
-//                  Hello, World!
-//                </p>
-//              </body>
-//            </html>
-//            """
-//        }
-//    }
+    func test_helloWorld_matchesSnapshot() {
+        let sut = WebPage {
+            Text("Hello, World!")
+        }
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <!DOCTYPE html>
+            <html>
+              <body>
+                <p>
+                  Hello, World!
+                </p>
+              </body>
+            </html>
+            """
+        }
+    }
 
     // MARK: - helpers
     private func makeSUT(content: String = "") -> H1 {

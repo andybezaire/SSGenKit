@@ -1,34 +1,38 @@
 import XCTest
 import SSGenKit
+import InlineSnapshotTesting
 
 final class WebPageTests: XCTestCase {
-    func test_printing_containsDoctype() throws {
-        let sut = makeSUT()
+    func test_printing_succeeds() throws {
+        let content = uniqueString()
+        let sut = makeSUT(content: { content })
 
         let html = "\(sut)"
 
-        XCTAssertTrue(html.contains("<!DOCTYPE html>"))
+        let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"))
+        let htmlIndex = try XCTUnwrap(html.index(of: "<html>"))
+        XCTAssertTrue(html.contains("<!DOCTYPE html>"), "should contain doctype tag")
+        XCTAssertTrue(doctypeIndex < htmlIndex, "doctype should be before html open")
+        XCTAssertTrue(html.contains(content), "should contain content")
     }
 
-//    func test_printing_containsDoctypeBeforeHTMLTag() throws {
-//        let sut = makeSUT()
-//
-//        let html = "\(sut)"
-//
-//        let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"))
-//        let htmlIndex = try XCTUnwrap(html.index(of: "<html>"))
-//
-//        XCTAssertTrue(doctypeIndex < htmlIndex, "doctype should be before html open")
-//    }
+    func test_printing_matchesSnapshot() {
+        let content = "This is a simple site."
+        let sut = makeSUT(content: { content })
 
-//    func test_emptyHeadContent_printing_containsNoHeadTag() throws {
-//        let sut = makeSUT(headContent: nil)
-//
-//        let html = "\(sut)"
-//
-//        XCTAssertNil(html.index(of: "<head>"))
-//        XCTAssertNil(html.index(of: "</head>"))
-//    }
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <!DOCTYPE html>
+            <html>
+              <body>
+                This is a simple site.
+              </body>
+            </html>
+            """
+        }
+    }
 
 //    func test_headContent_printing_containsHeadTag() throws {
 //        let sut = makeSUT(headContent: .init(title: uniqueString()))
