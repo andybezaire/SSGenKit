@@ -4,7 +4,7 @@ import InlineSnapshotTesting
 
 final class TextTests: XCTestCase {
     func test_matchesSnapshot() {
-        let sut = makeSUT(content: "Hello, World!")
+        let sut = Text("Hello, World!")
 
         let html = "\(sut)"
 
@@ -15,11 +15,5 @@ final class TextTests: XCTestCase {
             </p>
             """
         }
-    }
-
-    // MARK: - helpers
-    private func makeSUT(content: String = "") -> HTMLElement {
-        let element = Text(content)
-        return element
     }
 }
