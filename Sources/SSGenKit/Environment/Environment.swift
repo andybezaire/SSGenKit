@@ -73,12 +73,12 @@ extension HTMLBodyElement {
         _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
         _ value: Value
     ) -> HTMLBodyElement {
-        EnvironmentKeyWritingModifier(base: self, keyPath: keyPath, value: value)
+        EnvironmentKeyWritingModifier(element: self, keyPath: keyPath, value: value)
     }
 }
 
-private struct EnvironmentKeyWritingModifier<Base, Value>: HTMLBodyElement where Base: HTMLBodyElement {
-    let base: Base
+private struct EnvironmentKeyWritingModifier<Element, Value>: HTMLBodyElement where Element: HTMLBodyElement {
+    let element: Element
     let keyPath: WritableKeyPath<EnvironmentValues, Value>
     let value: Value
 
@@ -86,6 +86,6 @@ private struct EnvironmentKeyWritingModifier<Base, Value>: HTMLBodyElement where
         let previous = EnvironmentValues.current
         defer { EnvironmentValues.current = previous }
         EnvironmentValues.current[keyPath: keyPath] = value
-        return "\(base)"
+        return "\(element)"
     }
 }
