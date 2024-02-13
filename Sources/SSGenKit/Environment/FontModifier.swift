@@ -22,17 +22,8 @@ extension HTMLBodyElement {
     }
 }
 
-extension HTMLBodyElement {
-    public func environment<Value>(
-        _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
-        _ value: Value
-    ) -> HTMLBodyElement {
-        EnvironmentKeyWritingModifier(element: self, keyPath: keyPath, value: value)
-    }
-}
-
 extension EnvironmentValues {
-    public var font: HTMLBodyFont {
+    var font: HTMLBodyFont {
         get { self[FontKey.self] }
         set { self [FontKey.self] = newValue }
     }

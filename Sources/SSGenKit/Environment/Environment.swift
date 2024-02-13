@@ -1,5 +1,5 @@
 @propertyWrapper
-public struct Environment<Value>: @unchecked Sendable where Value: Sendable  {
+struct Environment<Value>: @unchecked Sendable where Value: Sendable  {
     let keyPath: KeyPath<EnvironmentValues, Value>
 
     public init(_ keyPath: KeyPath<EnvironmentValues, Value>) {
@@ -11,7 +11,16 @@ public struct Environment<Value>: @unchecked Sendable where Value: Sendable  {
     }
 }
 
-public struct EnvironmentValues {
+extension HTMLBodyElement {
+    func environment<Value>(
+        _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
+        _ value: Value
+    ) -> HTMLBodyElement {
+        EnvironmentKeyWritingModifier(element: self, keyPath: keyPath, value: value)
+    }
+}
+
+struct EnvironmentValues {
     static var current = Self()
 
     private var storage: [AnyHashable: Any] = [:]
@@ -28,7 +37,7 @@ public struct EnvironmentValues {
     }
 }
 
-public protocol EnvironmentKey {
+protocol EnvironmentKey {
     associatedtype Value
     static var defaultValue: Value { get }
 }
