@@ -1,33 +1,13 @@
-public protocol EnvironmentKey {
-    associatedtype Value
-    static var defaultValue: Value { get }
-}
+@propertyWrapper
+public struct Environment<Value>: @unchecked Sendable where Value: Sendable  {
+    let keyPath: KeyPath<EnvironmentValues, Value>
 
-private enum FontKey: EnvironmentKey {
-    static let defaultValue: HTMLBodyFont = .body
-}
+    public init(_ keyPath: KeyPath<EnvironmentValues, Value>) {
+        self.keyPath = keyPath
+    }
 
-public enum HTMLBodyFont: CaseIterable {
-    /// Equivalent to H1
-    case mainHeading
-    /// Equivalent to H2
-    case heading
-    /// Equivalent to H3
-    case subheading
-    /// Equivalent to H4
-    case tertiaryHeading
-    /// Equivalent to H5
-    case quaternaryHeading
-    /// Equivalent to H6
-    case quinaryHeading
-    /// Equivalent to p
-    case body
-}
-
-extension HTMLBodyElement {
-    public func font(_ font: HTMLBodyFont) -> HTMLBodyElement {
-        return self
-            .environment(\.font, font)
+    public var wrappedValue: Value {
+        EnvironmentValues.current[keyPath: keyPath ]
     }
 }
 
@@ -48,36 +28,12 @@ public struct EnvironmentValues {
     }
 }
 
-extension EnvironmentValues {
-    public var font: HTMLBodyFont {
-        get { self[FontKey.self] }
-        set { self [FontKey.self] = newValue }
-    }
+public protocol EnvironmentKey {
+    associatedtype Value
+    static var defaultValue: Value { get }
 }
 
-@propertyWrapper
-public struct Environment<Value>: @unchecked Sendable where Value: Sendable  {
-    let keyPath: KeyPath<EnvironmentValues, Value>
-
-    public init(_ keyPath: KeyPath<EnvironmentValues, Value>) {
-        self.keyPath = keyPath
-    }
-
-    public var wrappedValue: Value {
-        EnvironmentValues.current[keyPath: keyPath ]
-    }
-}
-
-extension HTMLBodyElement {
-    public func environment<Value>(
-        _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
-        _ value: Value
-    ) -> HTMLBodyElement {
-        EnvironmentKeyWritingModifier(element: self, keyPath: keyPath, value: value)
-    }
-}
-
-private struct EnvironmentKeyWritingModifier<Element, Value>: HTMLBodyElement where Element: HTMLBodyElement {
+struct EnvironmentKeyWritingModifier<Element, Value>: HTMLBodyElement where Element: HTMLBodyElement {
     let element: Element
     let keyPath: WritableKeyPath<EnvironmentValues, Value>
     let value: Value
