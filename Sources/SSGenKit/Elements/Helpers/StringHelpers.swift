@@ -10,8 +10,36 @@ extension String {
                </\(tag.rawValue)>
                """
     }
+
+    init(font: HTMLBodyFont, content: () -> HTMLElement) {
+        self = """
+               <\(font.htmlTag.rawValue)>
+                 \(indented: "\(content())")
+               </\(font.htmlTag.rawValue)>
+               """
+    }
 }
 
+extension HTMLBodyFont {
+    var htmlTag: String.HTMLTag {
+        switch self {
+        case .mainHeading:
+            return .h1
+        case .heading:
+            return .h2
+        case .subheading:
+            return .h3
+        case .tertiaryHeading:
+            return .h4
+        case .quaternaryHeading:
+            return .h5
+        case .quinaryHeading:
+            return .h6
+        case .body:
+            return .p
+        }
+    }
+}
 
 extension DefaultStringInterpolation {
     mutating func appendInterpolation(indented string: String) {
