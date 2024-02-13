@@ -3,7 +3,7 @@ import SSGenKit
 import InlineSnapshotTesting
 
 final class FontTests: XCTestCase {
-    func test_default_matchesSnapshot() {
+    func test_default_html_matchesSnapshot() {
         let sut = Text("Hello, World!")
 
         let html = "\(sut)"
@@ -17,7 +17,7 @@ final class FontTests: XCTestCase {
         }
     }
 
-    func test_font_matchesSnapshot() throws {
+    func test_randomFont_html_matchesSnapshot() throws {
         let (font, tag) = try uniqueFontPair()
         let sut = Text("Hello, World!")
             .font(font)
