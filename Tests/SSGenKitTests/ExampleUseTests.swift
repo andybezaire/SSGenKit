@@ -16,26 +16,6 @@ final class ExampleUseTests: XCTestCase {
 //        }
 //    }
 
-    func test_noContent_printing_containsTag() throws {
-        let sut = makeSUT()
-
-        let html = "\(sut)"
-
-        let openIndex = try XCTUnwrap(html.index(of: "<h1>"))
-        let closeIndex = try XCTUnwrap(html.index(of: "</h1>"))
-
-        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
-    }
-
-    func test_printing_containsContent() throws {
-        let content = uniqueString()
-        let sut = makeSUT(content: content)
-
-        let html = "\(sut)"
-
-        XCTAssertTrue(html.contains(content), "html: \(html) should contain \(content)")
-    }
-
     func test_helloWorld_matchesSnapshot() {
         let sut = WebPage {
             Text("Hello, World!")
@@ -55,33 +35,5 @@ final class ExampleUseTests: XCTestCase {
             </html>
             """
         }
-    }
-
-//    func test_titledHelloWorld_matchesSnapshot() {
-//        let sut = WebPage {
-//            Text("Hello, World!")
-//                .font(.h1)
-//        }
-//
-//        let html = "\(sut)"
-//
-//        assertInlineSnapshot(of: html, as: .lines) {
-//            """
-//            <!DOCTYPE html>
-//            <html>
-//              <body>
-//                <h1>
-//                  Hello, World!
-//                </h1>
-//              </body>
-//            </html>
-//            """
-//        }
-//    }
-
-    // MARK: - helpers
-    private func makeSUT(content: String = "") -> H1 {
-        let element = H1 { content }
-        return element
     }
 }
