@@ -14,19 +14,7 @@ extension WebPage: HTMLElement {
     public var description: String {
         """
         <!DOCTYPE html>
-        \(HTML(body: { Body.init(content: content) }))
-        """
-    }
-}
-
-private struct Head: CustomStringConvertible {
-    let content: () -> CustomStringConvertible
-
-    var description: String {
-        """
-        <head>
-          \(content())
-        </head>
+        \(HTML(body: { .init(content: content) }))
         """
     }
 }
