@@ -16,6 +16,10 @@ final class WebPageTests: XCTestCase {
         XCTAssertTrue(html.contains(content), "should contain content")
     }
 
+    func test_init_doesNotExecuteContent() throws {
+        _ = makeSUT(content: { XCTFail() ; return "" })
+    }
+
     func test_printing_matchesSnapshot() {
         let content = "This is a simple site."
         let sut = makeSUT(content: { content })
