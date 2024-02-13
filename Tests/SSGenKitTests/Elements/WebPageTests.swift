@@ -42,7 +42,7 @@ final class WebPageTests: XCTestCase {
     private func makeSUT(
         headContent: HeadContent? = nil,
         content: @escaping () -> HTMLBodyElement = { Text("") }
-    ) -> WebPage {
+    ) -> HTMLElement {
         let sut = if let title = headContent?.title {
             WebPage(title: title, content: content)
         } else {

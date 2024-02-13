@@ -10,23 +10,13 @@ public struct WebPage {
     }
 }
 
-extension WebPage: CustomStringConvertible {
+extension WebPage: HTMLElement {
     public var description: String {
         """
         <!DOCTYPE html>
         \(HTML(body: { Body.init(content: content) }))
         """
     }
-//        """
-//        <!DOCTYPE html>
-//        \( HTML { """
-//                  \(title.map { title in "\(Head { Title(title) })" } ?? "")
-//                  <body>
-//                  </body>
-//        """ })
-//        </html>
-//        """
-//    }
 }
 
 private struct Head: CustomStringConvertible {
