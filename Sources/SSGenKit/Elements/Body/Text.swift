@@ -8,6 +8,6 @@ public struct Text: HTMLBodyElement {
     }
 
     public var description: String {
-        .init(tag: font.htmlTag, content: { content })
+        .init(font: font, content: { content })
     }
 }
