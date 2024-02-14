@@ -3,7 +3,7 @@ import SSGenKit
 import InlineSnapshotTesting
 
 final class WebPageTests: XCTestCase {
-    func test_printing_succeeds() throws {
+    func test_content_printing_succeeds() throws {
         let content = uniqueString()
         let sut = makeSUT(content: { content })
 
@@ -20,7 +20,7 @@ final class WebPageTests: XCTestCase {
         _ = makeSUT(content: { XCTFail() ; return "" })
     }
 
-    func test_printing_matchesSnapshot() {
+    func test_content_printing_matchesSnapshot() {
         let content = "This is a simple site."
         let sut = makeSUT(content: { content })
 
