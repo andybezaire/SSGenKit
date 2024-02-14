@@ -61,10 +61,10 @@ final class WebPageTests: XCTestCase {
     }
 
     // MARK: - snapshots
-
     func test_content_printing_matchesSnapshot() {
-        let content = "This is a simple site."
-        let sut = makeSUT(content: { content })
+        let sut = WebPage {
+            "This is a simple site."
+        }
 
         let html = "\(sut)"
 
@@ -80,10 +80,40 @@ final class WebPageTests: XCTestCase {
         }
     }
 
+    func test_multilineContent_printing_matchesSnapshot() {
+        let sut = WebPage {
+            "This is a simple site."
+            "This is a second line."
+        }
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <!DOCTYPE html>
+            <html>
+              <body>
+                This is a simple site.
+                This is a second line.
+              </body>
+            </html>
+            """
+        }
+    }
+
+//    func test_title_printing_containsTitle() throws {
+//        let title = uniqueString()
+//        let sut = makeSUT(headContent: .init(title: title))
+//
+//        let html = "\(sut)"
+//
+//        XCTAssertTrue(html.contains(title), "should contain title")
+//    }
+
     // MARK: - helpers
     private func makeSUT(
         headContent: HeadContent? = nil,
-        content: @escaping () -> HTMLBodyElement = { Text("empty") }
+        @HTMLBodyElementBuilder content: @escaping () -> HTMLBodyElement = { Text("empty") }
     ) -> HTMLElement {
         let sut = if let title = headContent?.title {
             WebPage(title: title, content: content)

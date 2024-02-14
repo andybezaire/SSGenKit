@@ -20,6 +20,28 @@ final class HTMLTests: XCTestCase {
         }
     }
 
+    func test_multiline_matchesSnapshot() {
+        let sut = makeSUT(
+            bodyContent: {
+                "This is the first line."
+                "This is the second line."
+            }
+        )
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <html>
+              <body>
+                This is the first line.
+                This is the second line.
+              </body>
+            </html>
+            """
+        }
+    }
+
     //    func test_headContent_printing_containsHeadTag() throws {
     //        let sut = makeSUT(headContent: .init(title: uniqueString()))
     //
@@ -58,7 +80,7 @@ final class HTMLTests: XCTestCase {
     // MARK: - helpers
     private func makeSUT(
         headContent: HTML.HeadContent? = nil,
-        bodyContent: @escaping () -> HTMLBodyElement = { "emptyBody" }
+        @HTMLBodyElementBuilder bodyContent: @escaping () -> HTMLBodyElement = { "emptyBody" }
     ) -> HTMLElement {
         let element: HTML = if let headContent {
             .init(

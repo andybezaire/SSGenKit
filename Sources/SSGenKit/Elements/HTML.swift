@@ -6,7 +6,7 @@ struct HTML: HTMLElement {
 
     init(
         headContent: HeadContent? = nil,
-        bodyContent: @escaping () -> HTMLBodyElement
+        @HTMLBodyElementBuilder bodyContent: @escaping () -> HTMLBodyElement
     ) {
         self.headContent = headContent
         self.bodyContent = bodyContent
@@ -30,4 +30,11 @@ struct Head {
 
 extension Head: HTMLElement {
     var description: String { .init(tag: .head, content: content) }
+}
+
+@resultBuilder
+public struct HTMLBodyElementBuilder {
+    public static func buildBlock(_ parts: HTMLBodyElement...) -> HTMLBodyElement {
+        parts.map(\.description).joined(separator: "\n")
+    }
 }

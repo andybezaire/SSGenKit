@@ -4,7 +4,10 @@ public struct WebPage {
     let title: String?
     let content: () -> HTMLBodyElement
 
-    public init(title: String? = nil, content: @escaping () -> HTMLBodyElement) {
+    public init(
+        title: String? = nil,
+        @HTMLBodyElementBuilder content: @escaping () -> HTMLBodyElement
+    ) {
         self.title = title
         self.content = content
     }
