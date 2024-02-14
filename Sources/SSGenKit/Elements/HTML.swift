@@ -1,13 +1,16 @@
 struct HTML: HTMLElement {
-    private let body: () -> Body
+    private let bodyContent: () -> HTMLBodyElement
 
-    init(body: @escaping () -> Body) {
-        self.body = body
+    init(bodyContent: @escaping () -> HTMLBodyElement) {
+        self.bodyContent = bodyContent
     }
 }
 
 extension HTML: CustomStringConvertible {
-    var description: String { .init(tag: .html, content: body) }
+    var description: String {
+        let body = Body(content: bodyContent)
+        return  .init(tag: .html, content: { body })
+    }
 }
 
 struct Head {

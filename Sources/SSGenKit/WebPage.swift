@@ -13,9 +13,7 @@ public struct WebPage {
 extension WebPage: HTMLElement {
     public var description: String {
         let html = HTML {
-            Body {
-                content()
-            }
+            content()
         }
 
         return """

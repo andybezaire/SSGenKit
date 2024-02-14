@@ -4,7 +4,7 @@ import InlineSnapshotTesting
 
 final class HTMLTests: XCTestCase {
     func test_init_doesNotExecuteContent() throws {
-        _ = makeSUT(body: { .init(content: { XCTFail() ; return "" }) })
+        _ = makeSUT(bodyContent: { XCTFail() ; return "" })
     }
 
     func test_printing_containsTag() throws {
@@ -35,7 +35,7 @@ final class HTMLTests: XCTestCase {
 
     func test_printing_containsBodyContent() throws {
         let content = uniqueString()
-        let sut = makeSUT(body: { .init(content: { content }) })
+        let sut = makeSUT(bodyContent: { content })
 
         let html = "\(sut)"
 
@@ -48,7 +48,7 @@ final class HTMLTests: XCTestCase {
     }
 
     func test_matchesSnapshot() {
-        let sut = makeSUT(body: { .init(content: { "This is the body." }) })
+        let sut = makeSUT(bodyContent: { "This is the body." })
 
         let html = "\(sut)"
 
@@ -99,8 +99,10 @@ final class HTMLTests: XCTestCase {
     //    }
 
     // MARK: - helpers
-    private func makeSUT(body: @escaping () -> Body = { .init(content: { "empty" }) }) -> HTMLElement {
-        let element = HTML(body: body)
+    private func makeSUT(
+        bodyContent: @escaping () -> HTMLBodyElement = { "empty" }
+    ) -> HTMLElement {
+        let element = HTML(bodyContent: bodyContent)
         return element
     }
 }
