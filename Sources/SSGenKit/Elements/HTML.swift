@@ -1,7 +1,14 @@
 struct HTML: HTMLElement {
+    typealias HeadContent = () -> HTMLBodyElement
+
+    private let headContent: HeadContent?
     private let bodyContent: () -> HTMLBodyElement
 
-    init(bodyContent: @escaping () -> HTMLBodyElement) {
+    init(
+        headContent: HeadContent? = nil,
+        bodyContent: @escaping () -> HTMLBodyElement
+    ) {
+        self.headContent = headContent
         self.bodyContent = bodyContent
     }
 }

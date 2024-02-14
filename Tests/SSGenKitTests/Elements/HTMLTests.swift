@@ -57,9 +57,17 @@ final class HTMLTests: XCTestCase {
 
     // MARK: - helpers
     private func makeSUT(
-        bodyContent: @escaping () -> HTMLBodyElement = { "empty" }
+        headContent: HTML.HeadContent? = nil,
+        bodyContent: @escaping () -> HTMLBodyElement = { "emptyBody" }
     ) -> HTMLElement {
-        let element = HTML(bodyContent: bodyContent)
+        let element: HTML = if let headContent {
+            .init(
+                headContent: headContent,
+                bodyContent: bodyContent
+            )
+        } else {
+            .init(bodyContent: bodyContent)
+        }
         return element
     }
 }
