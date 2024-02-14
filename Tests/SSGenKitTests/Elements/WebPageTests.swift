@@ -3,6 +3,10 @@ import SSGenKit
 import InlineSnapshotTesting
 
 final class WebPageTests: XCTestCase {
+    func test_init_doesNotExecuteContent() throws {
+        _ = makeSUT(content: { XCTFail() ; return "" })
+    }
+
     func test_content_printing_containsDoctype() throws {
         let content = uniqueString()
         let sut = makeSUT(content: { content })
@@ -14,18 +18,49 @@ final class WebPageTests: XCTestCase {
         XCTAssertTrue(doctypeIndex < htmlIndex, "doctype should be before html open")
     }
 
-    func test_content_printing_containsContent() throws {
+    // MARK: - html
+    func test_printing_containsHTMLTag() throws {
+        let sut = makeSUT()
+
+        let html = "\(sut)"
+
+        let openIndex = try XCTUnwrap(html.index(of: "<html>"), "should have open tag but was missing")
+        let closeIndex = try XCTUnwrap(html.index(of: "</html>"), "should have close tag but was missing")
+
+        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
+    }
+
+    // MARK: - body
+    func test_printing_containsBodyTag() throws {
+        let sut = makeSUT()
+
+        let html = "\(sut)"
+
+        let openIndex = try XCTUnwrap(html.index(of: "<body>"), "should have open tag but was missing")
+        let closeIndex = try XCTUnwrap(html.index(of: "</body>"), "should have close tag but was missing")
+        let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
+        let htmlCloseIndex = try XCTUnwrap(html.index(of: "</html>"))
+
+        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
+        XCTAssertTrue(openIndex > htmlOpenIndex, "tag open should be after html open")
+        XCTAssertTrue(closeIndex < htmlCloseIndex, "tag close should be before html close")
+    }
+
+    func test_printing_containsBodyContent() throws {
         let content = uniqueString()
         let sut = makeSUT(content: { content })
 
         let html = "\(sut)"
 
-        XCTAssertTrue(html.contains(content))
+        let contentIndex = try XCTUnwrap(html.index(of: "\(content)"), "html: \(html) should contain \(content)")
+        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body>"))
+        let bodyCloseIndex = try XCTUnwrap(html.index(of: "</body>"))
+
+        XCTAssertTrue(contentIndex > bodyOpenIndex, "content should be after body open")
+        XCTAssertTrue(contentIndex < bodyCloseIndex, "content should be before body close")
     }
 
-    func test_init_doesNotExecuteContent() throws {
-        _ = makeSUT(content: { XCTFail() ; return "" })
-    }
+    // MARK: - snapshots
 
     func test_content_printing_matchesSnapshot() {
         let content = "This is a simple site."

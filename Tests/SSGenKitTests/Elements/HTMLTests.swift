@@ -2,51 +2,8 @@ import XCTest
 @testable import SSGenKit
 import InlineSnapshotTesting
 
+/// Snapshot tests of internal implementation to help code printing functionality
 final class HTMLTests: XCTestCase {
-    func test_init_doesNotExecuteContent() throws {
-        _ = makeSUT(bodyContent: { XCTFail() ; return "" })
-    }
-
-    func test_printing_containsTag() throws {
-        let sut = makeSUT()
-
-        let html = "\(sut)"
-
-        let openIndex = try XCTUnwrap(html.index(of: "<html>"), "should have open tag but was missing")
-        let closeIndex = try XCTUnwrap(html.index(of: "</html>"), "should have close tag but was missing")
-
-        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
-    }
-
-    func test_printing_containsBodyTag() throws {
-        let sut = makeSUT()
-
-        let html = "\(sut)"
-
-        let openIndex = try XCTUnwrap(html.index(of: "<body>"), "should have open tag but was missing")
-        let closeIndex = try XCTUnwrap(html.index(of: "</body>"), "should have close tag but was missing")
-        let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
-        let htmlCloseIndex = try XCTUnwrap(html.index(of: "</html>"))
-
-        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
-        XCTAssertTrue(openIndex > htmlOpenIndex, "tag open should be after html open")
-        XCTAssertTrue(closeIndex < htmlCloseIndex, "tag close should be before html close")
-    }
-
-    func test_printing_containsBodyContent() throws {
-        let content = uniqueString()
-        let sut = makeSUT(bodyContent: { content })
-
-        let html = "\(sut)"
-
-        let contentIndex = try XCTUnwrap(html.index(of: "\(content)"), "html: \(html) should contain \(content)")
-        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body>"))
-        let bodyCloseIndex = try XCTUnwrap(html.index(of: "</body>"))
-
-        XCTAssertTrue(contentIndex > bodyOpenIndex, "content should be after body open")
-        XCTAssertTrue(contentIndex < bodyCloseIndex, "content should be before body close")
-    }
-
     func test_matchesSnapshot() {
         let sut = makeSUT(bodyContent: { "This is the body." })
 
