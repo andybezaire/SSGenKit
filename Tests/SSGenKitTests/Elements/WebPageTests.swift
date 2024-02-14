@@ -4,12 +4,12 @@ import InlineSnapshotTesting
 
 final class WebPageTests: XCTestCase {
     func test_init_doesNotExecuteContent() throws {
-        _ = makeSUT(content: { XCTFail() ; return "" })
+        _ = makeSUT(content: { XCTFail() ; return Text("empty") })
     }
 
     func test_content_printing_containsDoctype() throws {
         let content = uniqueString()
-        let sut = makeSUT(content: { content })
+        let sut = makeSUT(content: { Text(content) })
 
         let html = "\(sut)"
 
@@ -48,7 +48,7 @@ final class WebPageTests: XCTestCase {
 
     func test_printing_containsBodyContent() throws {
         let content = uniqueString()
-        let sut = makeSUT(content: { content })
+        let sut = makeSUT(content: { Text(content) })
 
         let html = "\(sut)"
 
@@ -63,7 +63,7 @@ final class WebPageTests: XCTestCase {
     // MARK: - snapshots
     func test_content_printing_matchesSnapshot() {
         let sut = WebPage {
-            "This is a simple site."
+            Text("This is a simple site.")
         }
 
         let html = "\(sut)"
@@ -73,7 +73,9 @@ final class WebPageTests: XCTestCase {
             <!DOCTYPE html>
             <html>
               <body>
-                This is a simple site.
+                <p>
+                  This is a simple site.
+                </p>
               </body>
             </html>
             """
@@ -82,8 +84,8 @@ final class WebPageTests: XCTestCase {
 
     func test_multilineContent_printing_matchesSnapshot() {
         let sut = WebPage {
-            "This is a simple site."
-            "This is a second line."
+            Text("This is a simple site.")
+            Text("This is a second line.")
         }
 
         let html = "\(sut)"
@@ -93,8 +95,12 @@ final class WebPageTests: XCTestCase {
             <!DOCTYPE html>
             <html>
               <body>
-                This is a simple site.
-                This is a second line.
+                <p>
+                  This is a simple site.
+                </p>
+                <p>
+                  This is a second line.
+                </p>
               </body>
             </html>
             """

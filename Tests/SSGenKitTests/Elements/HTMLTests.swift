@@ -5,7 +5,7 @@ import InlineSnapshotTesting
 /// Snapshot tests of internal implementation to help code printing functionality
 final class HTMLTests: XCTestCase {
     func test_matchesSnapshot() {
-        let sut = makeSUT(bodyContent: { "This is the body." })
+        let sut = makeSUT(bodyContent: { Text("This is the body.") })
 
         let html = "\(sut)"
 
@@ -13,7 +13,9 @@ final class HTMLTests: XCTestCase {
             """
             <html>
               <body>
-                This is the body.
+                <p>
+                  This is the body.
+                </p>
               </body>
             </html>
             """
@@ -23,8 +25,8 @@ final class HTMLTests: XCTestCase {
     func test_multiline_matchesSnapshot() {
         let sut = makeSUT(
             bodyContent: {
-                "This is the first line."
-                "This is the second line."
+                Text("This is the first line.")
+                Text("This is the second line.")
             }
         )
 
@@ -34,8 +36,12 @@ final class HTMLTests: XCTestCase {
             """
             <html>
               <body>
-                This is the first line.
-                This is the second line.
+                <p>
+                  This is the first line.
+                </p>
+                <p>
+                  This is the second line.
+                </p>
               </body>
             </html>
             """
@@ -80,7 +86,7 @@ final class HTMLTests: XCTestCase {
     // MARK: - helpers
     private func makeSUT(
         headContent: HTML.HeadContent? = nil,
-        @HTMLBodyElementBuilder bodyContent: @escaping () -> HTMLBodyElement = { "emptyBody" }
+        @HTMLBodyElementBuilder bodyContent: @escaping () -> HTMLBodyElement = { Text("emptyBody") }
     ) -> HTMLElement {
         let element: HTML = if let headContent {
             .init(

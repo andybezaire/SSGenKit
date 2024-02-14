@@ -6,4 +6,3 @@ extension String: HTMLHeadElement { }
 
 // MARK: - body
 public protocol HTMLBodyElement: HTMLElement { }
-extension String: HTMLBodyElement { }
