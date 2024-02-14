@@ -3,17 +3,24 @@ import SSGenKit
 import InlineSnapshotTesting
 
 final class WebPageTests: XCTestCase {
-    func test_content_printing_succeeds() throws {
+    func test_content_printing_containsDoctype() throws {
         let content = uniqueString()
         let sut = makeSUT(content: { content })
 
         let html = "\(sut)"
 
-        let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"))
+        let doctypeIndex = try XCTUnwrap(html.index(of: "<!DOCTYPE html>"), "should contain doctype tag")
         let htmlIndex = try XCTUnwrap(html.index(of: "<html>"))
-        XCTAssertTrue(html.contains("<!DOCTYPE html>"), "should contain doctype tag")
         XCTAssertTrue(doctypeIndex < htmlIndex, "doctype should be before html open")
-        XCTAssertTrue(html.contains(content), "should contain content")
+    }
+
+    func test_content_printing_containsContent() throws {
+        let content = uniqueString()
+        let sut = makeSUT(content: { content })
+
+        let html = "\(sut)"
+
+        XCTAssertTrue(html.contains(content))
     }
 
     func test_init_doesNotExecuteContent() throws {
@@ -41,7 +48,7 @@ final class WebPageTests: XCTestCase {
     // MARK: - helpers
     private func makeSUT(
         headContent: HeadContent? = nil,
-        content: @escaping () -> HTMLBodyElement = { Text("") }
+        content: @escaping () -> HTMLBodyElement = { Text("empty") }
     ) -> HTMLElement {
         let sut = if let title = headContent?.title {
             WebPage(title: title, content: content)
