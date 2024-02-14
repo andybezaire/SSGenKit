@@ -15,22 +15,13 @@ struct HTML {
 
 extension HTML: HTMLElement {
     var description: String {
+        let head: String? = headContent.map { .init(tag: .head, content: $0) }
         let body: String = .init(tag: .body, content: bodyContent)
-        let head: String? = headContent.map { head in String.init(tag: .head, content: head) }
 
-        let k: [String] = [head, body].compactMap { $0 }
-        return  .init(tag: .html, content: { k.joined(separator: "\n") })
+        let html = [head, body]
+            .compactMap { $0 }
+            .joined(separator: "\n")
+
+        return  .init(tag: .html, content: { html })
     }
-}
-
-struct Head {
-    private let content: () -> HTMLHeadElement
-
-    init(content: @escaping () -> HTMLHeadElement) {
-        self.content = content
-    }
-}
-
-extension Head: HTMLElement {
-    var description: String { .init(tag: .head, content: content) }
 }
