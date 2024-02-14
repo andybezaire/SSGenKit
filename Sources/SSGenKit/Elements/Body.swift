@@ -1,4 +1,4 @@
-struct Body: HTMLElement {
+struct Body {
     private let content: () -> HTMLBodyElement
 
     init(content: @escaping () -> HTMLBodyElement) {
@@ -6,6 +6,6 @@ struct Body: HTMLElement {
     }
 }
 
-extension Body: CustomStringConvertible {
+extension Body: HTMLElement {
     var description: String { .init(tag: .body, content: content) }
 }

@@ -12,9 +12,15 @@ public struct WebPage {
 
 extension WebPage: HTMLElement {
     public var description: String {
-        """
+        let html = HTML {
+            Body {
+                content()
+            }
+        }
+
+        return """
         <!DOCTYPE html>
-        \(HTML(body: { .init(content: content) }))
+        \(html)
         """
     }
 }
