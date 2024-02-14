@@ -15,10 +15,13 @@ public struct WebPage {
 
 extension WebPage: HTMLElement {
     public var description: String {
-        let head = title.map { title in { title } }
-        let html = HTML(headContent: head) {
-            content()
-        }
+        let titleTag = title.map { title in String.init(tag: .title, content: { title }) }
+        let headContent = titleTag.map { titleTag in { titleTag } }
+
+        let html = HTML(
+            headContent: headContent,
+            bodyContent: content
+        )
 
         return """
         <!DOCTYPE html>

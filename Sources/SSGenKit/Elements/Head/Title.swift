@@ -1,4 +1,4 @@
-public struct Title: CustomStringConvertible {
+public struct Title {
     private let content: () -> String
 
     public init(content: @escaping () -> String) {
@@ -8,7 +8,9 @@ public struct Title: CustomStringConvertible {
     public init(_ title: String) {
         self.init(content: { title })
     }
+}
 
+extension Title: HTMLHeadElement {
     public var description: String {
         """
         <title>
