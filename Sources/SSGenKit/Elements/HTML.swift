@@ -8,7 +8,7 @@ struct HTML: HTMLElement {
 
 extension HTML: CustomStringConvertible {
     var description: String {
-        let body = Body(content: bodyContent)
+        let body: String = .init(tag: .body, content: bodyContent)
         return  .init(tag: .html, content: { body })
     }
 }
