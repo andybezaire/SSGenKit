@@ -60,6 +60,22 @@ final class WebPageTests: XCTestCase {
         XCTAssertTrue(contentIndex < bodyCloseIndex, "content should be before body close")
     }
 
+    // MARK: - head
+//    func test_headContent_printing_containsHeadTag() throws {
+//        let sut = makeSUT(headContent: .init(title: "empty"))
+//
+//        let html = "\(sut)"
+//
+//        let openIndex = try XCTUnwrap(html.index(of: "<head>"), "should have open tag but was missing")
+//        let closeIndex = try XCTUnwrap(html.index(of: "</head>"), "should have close tag but was missing")
+//        let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
+//        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body>"))
+//
+//        XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
+//        XCTAssertTrue(openIndex > htmlOpenIndex, "tag open should be after html open")
+//        XCTAssertTrue(closeIndex < bodyOpenIndex, "tag close should be before body open")
+//    }
+
     // MARK: - snapshots
     func test_content_printing_matchesSnapshot() {
         let sut = WebPage {
