@@ -1,11 +1,11 @@
-struct HTML: HTMLElement {
-    typealias HeadContent = () -> HTMLBodyElement
+struct HTML {
+    typealias HeadContent = () -> HTMLHeadElement
 
     private let headContent: HeadContent?
     private let bodyContent: () -> HTMLBodyElement
 
     init(
-        headContent: HeadContent? = nil,
+        headContent: HeadContent?,
         @HTMLBodyElementBuilder bodyContent: @escaping () -> HTMLBodyElement
     ) {
         self.headContent = headContent
@@ -13,10 +13,13 @@ struct HTML: HTMLElement {
     }
 }
 
-extension HTML: CustomStringConvertible {
+extension HTML: HTMLElement {
     var description: String {
         let body: String = .init(tag: .body, content: bodyContent)
-        return  .init(tag: .html, content: { body })
+        let head: String? = headContent.map { head in String.init(tag: .head, content: head) }
+
+        let k: [String] = [head, body].compactMap { $0 }
+        return  .init(tag: .html, content: { k.joined(separator: "\n") })
     }
 }
 

@@ -48,6 +48,30 @@ final class HTMLTests: XCTestCase {
         }
     }
 
+    func test_headContent_matchesSnapshot() {
+        let sut = makeSUT(
+            headContent: { "This is the head." },
+            bodyContent: { Text("This is the body.") }
+        )
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <html>
+              <head>
+                This is the head.
+              </head>
+              <body>
+                <p>
+                  This is the body.
+                </p>
+              </body>
+            </html>
+            """
+        }
+    }
+
     //    func test_headContent_printing_containsHeadTag() throws {
     //        let sut = makeSUT(headContent: .init(title: uniqueString()))
     //
@@ -88,14 +112,11 @@ final class HTMLTests: XCTestCase {
         headContent: HTML.HeadContent? = nil,
         @HTMLBodyElementBuilder bodyContent: @escaping () -> HTMLBodyElement = { Text("emptyBody") }
     ) -> HTMLElement {
-        let element: HTML = if let headContent {
-            .init(
-                headContent: headContent,
-                bodyContent: bodyContent
-            )
-        } else {
-            .init(bodyContent: bodyContent)
-        }
+        let element: HTML =  .init(
+            headContent: headContent,
+            bodyContent: bodyContent
+        )
+
         return element
     }
 }

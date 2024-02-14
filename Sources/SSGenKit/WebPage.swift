@@ -15,7 +15,8 @@ public struct WebPage {
 
 extension WebPage: HTMLElement {
     public var description: String {
-        let html = HTML {
+        let head = title.map { title in { title } }
+        let html = HTML(headContent: head) {
             content()
         }
 
