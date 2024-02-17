@@ -26,19 +26,19 @@ final class VStackTests: XCTestCase {
         )
     }
 
-//    func test_printing_containsContent() throws {
-//        let content = uniqueString()
-//        let sut = makeSUT(content: content)
-//
-//        let html = "\(sut)"
-//
-//        let contentIndex = try XCTUnwrap(html.index(of: "\(content)"), "html: \(html) should contain \(content)")
-//        let tagOpenIndex = try XCTUnwrap(html.index(of: "<p>"))
-//        let tagCloseIndex = try XCTUnwrap(html.index(of: "</p>"))
-//
-//        XCTAssertTrue(contentIndex > tagOpenIndex, "content should be after body open")
-//        XCTAssertTrue(contentIndex < tagCloseIndex, "content should be before body close")
-//    }
+    func test_printing_containsContent() throws {
+        let content = uniqueString()
+        let sut = makeSUT(content: content)
+
+        let html = "\(sut)"
+
+        let contentIndex = try XCTUnwrap(html.index(of: "\(content)"), "html: \(html) should contain \(content)")
+        let tagOpenIndex = try XCTUnwrap(html.index(of: "<div"))
+        let tagCloseIndex = try XCTUnwrap(html.index(of: "</div>"))
+
+        XCTAssertTrue(contentIndex > tagOpenIndex, "content should be after div open")
+        XCTAssertTrue(contentIndex < tagCloseIndex, "content should be before div close")
+    }
 
     // MARK: - snapshots
 //    func test_basic_matchesSnapshot() {
@@ -71,8 +71,8 @@ final class VStackTests: XCTestCase {
 //    }
 
     // MARK: - helpers
-    private func makeSUT(content: HTMLBodyElement = Text("empty")) -> HTMLBodyElement {
-        let element = VStack { content }
+    private func makeSUT(content: String = "empty") -> HTMLBodyElement {
+        let element = VStack { Text(content) }
         return element
     }
 }
@@ -83,6 +83,6 @@ struct VStack {
 
 extension VStack: HTMLBodyElement {
     var description: String {
-        #"<div style="display:flex;flex-direction:column;align-items:center;"></div>"#
+        #"<div style="display:flex;flex-direction:column;align-items:center;">#\#(content())</div>"#
     }
 }
