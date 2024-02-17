@@ -3,11 +3,12 @@ extension String {
         case html
         case head, title
         case body, p, h1, h2, h3, h4, h5, h6
+        case div(style: String)
     }
 
     init(tag: HTMLTag, content: () -> HTMLElement) {
         self = """
-               <\(tag)>
+               <\(tag.styled)>
                  \(indented: "\(content())")
                </\(tag)>
                """
@@ -47,6 +48,39 @@ extension String.HTMLTag: CustomStringConvertible {
             "h5"
         case .h6:
             "h6"
+        case .div:
+            "div"
+        }
+    }
+}
+
+extension String.HTMLTag {
+    var styled: String {
+        switch self {
+        case .html:
+            "html"
+        case .head:
+            "head"
+        case .title:
+            "title"
+        case .body:
+            "body"
+        case .p:
+            "p"
+        case .h1:
+            "h1"
+        case .h2:
+            "h2"
+        case .h3:
+            "h3"
+        case .h4:
+            "h4"
+        case .h5:
+            "h5"
+        case .h6:
+            "h6"
+        case let .div(style):
+            #"div style="\#(style)""#
         }
     }
 }

@@ -8,7 +8,10 @@ public struct VStack {
 
 extension VStack: HTMLBodyElement {
     public var description: String {
-        #"<div style="display:flex;flex-direction:column;align-items:center;">#\#(content())</div>"#
+        .init(
+            tag: .div(style: "display:flex;flex-direction:column;align-items:center;"),
+            content: content
+        )
     }
 }
 
