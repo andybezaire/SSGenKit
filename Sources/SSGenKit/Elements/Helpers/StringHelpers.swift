@@ -1,5 +1,5 @@
 extension String {
-    enum HTMLTag: String {
+    enum HTMLTag {
         case html
         case head, title
         case body, p, h1, h2, h3, h4, h5, h6
@@ -7,18 +7,47 @@ extension String {
 
     init(tag: HTMLTag, content: () -> HTMLElement) {
         self = """
-               <\(tag.rawValue)>
+               <\(tag)>
                  \(indented: "\(content())")
-               </\(tag.rawValue)>
+               </\(tag)>
                """
     }
 
     init(font: HTMLBodyFont, content: () -> HTMLElement) {
         self = """
-               <\(font.htmlTag.rawValue)>
+               <\(font.htmlTag)>
                  \(indented: "\(content())")
-               </\(font.htmlTag.rawValue)>
+               </\(font.htmlTag)>
                """
+    }
+}
+
+extension String.HTMLTag: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .html:
+            "html"
+        case .head:
+            "head"
+        case .title:
+            "title"
+        case .body:
+            "body"
+        case .p:
+            "p"
+        case .h1:
+            "h1"
+        case .h2:
+            "h2"
+        case .h3:
+            "h3"
+        case .h4:
+            "h4"
+        case .h5:
+            "h5"
+        case .h6:
+            "h6"
+        }
     }
 }
 
