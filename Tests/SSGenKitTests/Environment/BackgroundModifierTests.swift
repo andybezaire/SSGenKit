@@ -3,7 +3,7 @@ import SSGenKit
 import InlineSnapshotTesting
 
 final class BackgroundModifierTests: XCTestCase {
-    func test_black_html_matchesSnapshot() {
+    func test_text_html_matchesSnapshot() {
         let sut = Text("Hello, World!")
             .background(Color.black)
 
@@ -18,59 +18,44 @@ final class BackgroundModifierTests: XCTestCase {
         }
     }
 
-//    func test_randomFont_html_matchesSnapshot() throws {
-//        try HTMLBodyFont.allCases.forEach { font in
-//            let tag = try FontPairTable.tag(for: font)
-//            let sut = Text("Hello, World!")
-//                .font(font)
-//
-//            let html = "\(sut)"
-//
-//            assertInlineSnapshot(of: html, as: .lines, message: "Snapshot did not match for font: \(font)") {
-//                """
-//                <\(tag)>
-//                  Hello, World!
-//                </\(tag)>
-//                """
-//            }
-//        }
-//    }
+    func test_allColors_html_matchesSnapshot() throws {
+        try Color.allCases.forEach { color in
+            let colorText = try ColorPairTable.text(for: color)
+            let sut = Text("Hello, World!")
+                .background(color)
+
+            let html = "\(sut)"
+
+            assertInlineSnapshot(of: html, as: .lines, message: "Snapshot did not match for color: \(color)") {
+                """
+                <p style="background-color:\(colorText)">
+                  Hello, World!
+                </p>
+                """
+            }
+        }
+    }
 
     // MARK: - helpers
-//    private func uniqueFont() -> HTMLBodyFont {
-//        HTMLBodyFont.allCases.randomElement()!
-//    }
 }
 
-//typealias FontPairTable = [HTMLBodyFont: String]
+private typealias ColorPairTable = [Color: String]
 
-//private extension FontPairTable {
-//    static func tag(for font: HTMLBodyFont) throws -> String {
-//        guard let tag = fontPairTable[font]
-//        else { throw UnimplementedFontError(font) }
-//
-//        return tag
-//    }
-//
-//    private static let fontPairTable: [HTMLBodyFont: String] = [
-//        .mainHeading: "h1",
-//        .heading: "h2",
-//        .subheading: "h3",
-//        .tertiaryHeading: "h4",
-//        .quaternaryHeading: "h5",
-//        .quinaryHeading: "h6",
-//        .body: "p",
-//    ]
-//
-//    private struct UnimplementedFontError: Error, CustomDebugStringConvertible {
-//        let font: HTMLBodyFont
-//
-//        init(_ font: HTMLBodyFont) {
-//            self.font = font
-//        }
-//
-//        var debugDescription: String {
-//            "Unimplemented for font: \(font)"
-//        }
-//    }
-//}
+private extension ColorPairTable {
+    static func text(for color: Color) throws -> String {
+        guard let text = colorPairTable[color]
+        else { throw UnimplementedColorError(color: color) }
+
+        return text
+    }
+
+    private static let colorPairTable: [Color: String] = [
+        .black: "black",
+        .white: "white",
+    ]
+
+    private struct UnimplementedColorError: Error, CustomDebugStringConvertible {
+        let color: Color
+        var debugDescription: String { "Unimplemented for color: \(color)" }
+    }
+}
