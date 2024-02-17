@@ -12,14 +12,15 @@ public struct VStack {
 
 extension VStack: HTMLBodyElement {
     public var description: String {
-        let background = styles.filter(\.isBackgroundColor)
+        let background = styles.filter(\.isBackgroundColor).first
 
-        let newStyles: [CSSStyle] = [
+        let vstackStyles: [CSSStyle] = [
             .alignItems(.center),
-            background.first,
             .display(.flex),
             .flexDirection(.column)
-        ].compactMap { $0 }
+        ]
+
+        let newStyles = (vstackStyles + [background]).compactMap { $0 }
 
         let currentStyles = EnvironmentValues.current.styles
         defer { EnvironmentValues.current.styles = currentStyles }

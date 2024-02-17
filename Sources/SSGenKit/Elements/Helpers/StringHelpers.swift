@@ -17,7 +17,7 @@ extension String {
     init(font: HTMLBodyFont, styles: [CSSStyle], content: () -> HTMLElement) {
         guard !styles.isEmpty else { self = .init(font: font, content: content) ; return }
 
-        let style = styles.map(\.description).joined()
+        let style = styles.map(\.description).sorted().joined()
 
         self = """
                <\(font.htmlTag) style="\(style)">
@@ -92,7 +92,7 @@ extension String.HTMLTag {
         case .h6:
             "h6"
         case let .div(styles):
-            #"div style="\#(styles.map(\.description).joined())""#
+            #"div style="\#(styles.map(\.description).sorted().joined())""#
         }
     }
 }
