@@ -12,14 +12,8 @@ public struct VStack {
 
 extension VStack: HTMLBodyElement {
     public var description: String {
-        let background = styles.filter { style in
-            if case .backgroundColor = style {
-                true
-            } else {
-                false
-            }
-        }
-        
+        let background = styles.filter(\.isBackgroundColor)
+
         let newStyles: [CSSStyle] = [
             .alignItems(.center),
             background.first,
@@ -29,13 +23,7 @@ extension VStack: HTMLBodyElement {
 
         let currentStyles = EnvironmentValues.current.styles
         defer { EnvironmentValues.current.styles = currentStyles }
-        EnvironmentValues.current.styles = currentStyles.filter { style in
-            if case .backgroundColor = style {
-                false
-            } else {
-                true
-            }
-        }
+        EnvironmentValues.current.styles = currentStyles.filter { !$0.isBackgroundColor }
 
         return .init(tag: .div(styles: newStyles), content: content)
     }

@@ -21,3 +21,13 @@ extension CSSStyle {
     enum DisplayStyle { case flex }
     enum FlexDirectionStyle { case column }
 }
+
+extension CSSStyle {
+    var isBackgroundColor: Bool {
+        if case .backgroundColor = self {
+            true
+        } else {
+            false
+        }
+    }
+}
