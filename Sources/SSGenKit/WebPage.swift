@@ -1,12 +1,10 @@
-import SwiftUI
-
 public struct WebPage {
     let title: String?
     let content: () -> HTMLBodyElement
 
     public init(
         title: String? = nil,
-        @HTMLBodyElementBuilder content: @escaping () -> HTMLBodyElement
+        content: @escaping () -> HTMLBodyElement
     ) {
         self.title = title
         self.content = content

@@ -121,28 +121,6 @@ final class WebPageTests: XCTestCase {
                 <p>
                   This is a simple site.
                 </p>
-              </body>
-            </html>
-            """
-        }
-    }
-
-    func test_multilineContent_printing_matchesSnapshot() {
-        let sut = WebPage {
-            Text("This is a simple site.")
-            Text("This is a second line.")
-        }
-
-        let html = "\(sut)"
-
-        assertInlineSnapshot(of: html, as: .lines) {
-            """
-            <!DOCTYPE html>
-            <html>
-              <body>
-                <p>
-                  This is a simple site.
-                </p>
                 <p>
                   This is a second line.
                 </p>
@@ -151,15 +129,6 @@ final class WebPageTests: XCTestCase {
             """
         }
     }
-
-//    func test_title_printing_containsTitle() throws {
-//        let title = uniqueString()
-//        let sut = makeSUT(headContent: .init(title: title))
-//
-//        let html = "\(sut)"
-//
-//        XCTAssertTrue(html.contains(title), "should contain title")
-//    }
 
     // MARK: - helpers
     private func makeSUT(
