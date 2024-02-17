@@ -14,6 +14,18 @@ final class VStackTests: XCTestCase {
         XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
     }
 
+    func test_printing_containsFormatting() throws {
+        let sut = makeSUT()
+
+        let html = "\(sut)"
+
+        XCTAssertTrue(
+            html.contains(
+                #"<div style="display:flex;flex-direction:column;align-items:center;">"#
+            )
+        )
+    }
+
 //    func test_printing_containsContent() throws {
 //        let content = uniqueString()
 //        let sut = makeSUT(content: content)
@@ -71,6 +83,6 @@ struct VStack {
 
 extension VStack: HTMLBodyElement {
     var description: String {
-        "<div></div>"
+        #"<div style="display:flex;flex-direction:column;align-items:center;"></div>"#
     }
 }
