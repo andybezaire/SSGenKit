@@ -121,9 +121,6 @@ final class WebPageTests: XCTestCase {
                 <p>
                   This is a simple site.
                 </p>
-                <p>
-                  This is a second line.
-                </p>
               </body>
             </html>
             """

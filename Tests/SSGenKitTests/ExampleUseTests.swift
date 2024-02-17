@@ -17,7 +17,7 @@ final class ExampleUseTests: XCTestCase {
 //    }
 
     func test_helloWorld_matchesSnapshot() {
-        let sut = WebPage {
+        let sut = WebPage(title: "Welcome, World!") {
             Text("Hello, World!")
         }
 
@@ -27,6 +27,11 @@ final class ExampleUseTests: XCTestCase {
             """
             <!DOCTYPE html>
             <html>
+              <head>
+                <title>
+                  Welcome, World!
+                </title>
+              </head>
               <body>
                 <p>
                   Hello, World!
