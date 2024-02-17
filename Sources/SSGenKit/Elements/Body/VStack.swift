@@ -11,7 +11,7 @@ public struct VStack {
 extension VStack: HTMLBodyElement {
     public var description: String {
         .init(
-            tag: .div(style: "display:flex;flex-direction:column;align-items:center;"),
+            tag: .div(style: "align-items:center;display:flex;flex-direction:column;"),
             content: content
         )
     }

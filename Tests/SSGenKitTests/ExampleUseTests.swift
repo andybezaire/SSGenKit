@@ -43,7 +43,7 @@ final class ExampleUseTests: XCTestCase {
 //                </title>
 //              </head>
 //              <body>
-//                <section style="display:flex;flex-direction:column;align-items:center;">
+//                <section style="align-items:center;display:flex;flex-direction:column;">
 //                  <h1>
 //                    Jere Teittinen
 //                  </h1>
@@ -80,7 +80,7 @@ final class ExampleUseTests: XCTestCase {
 //                </title>
 //              </head>
 //              <body>
-//                <div style="display:flex;flex-direction:column;align-items:center;">
+//                <div style="align-items:center;display:flex;flex-direction:column;">
 //                  <p>
 //                    Hello, World!
 //                  </p>

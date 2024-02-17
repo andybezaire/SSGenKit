@@ -21,7 +21,7 @@ final class VStackTests: XCTestCase {
 
         XCTAssertTrue(
             html.contains(
-                #"<div style="display:flex;flex-direction:column;align-items:center;">"#
+                #"<div style="align-items:center;display:flex;flex-direction:column;">"#
             )
         )
     }
@@ -50,7 +50,7 @@ final class VStackTests: XCTestCase {
 
         assertInlineSnapshot(of: html, as: .lines) {
             """
-            <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="align-items:center;display:flex;flex-direction:column;">
               <p>
                 Hello, World!
               </p>
@@ -69,7 +69,7 @@ final class VStackTests: XCTestCase {
 
         assertInlineSnapshot(of: html, as: .lines) {
             """
-            <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="align-items:center;display:flex;flex-direction:column;">
               <p>
                 Hello, World!
               </p>
