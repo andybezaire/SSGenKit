@@ -1,19 +1,18 @@
 extension HTMLBodyElement {
     public func background(_ color: Color) -> HTMLBodyElement {
-        let currentStyles = EnvironmentValues.current.styles.styles
-        let styles: CSSStyles = .init(styles:  ["background-color:\(color)"] + currentStyles)
+        let styles = EnvironmentValues.current.styles
         return self
-            .environment(\.styles, styles)
+            .environment(\.styles, [.backgroundColor(color)] + styles)
     }
 }
 
 extension EnvironmentValues {
-    var styles: CSSStyles {
+    var styles: [CSSStyle] {
         get { self[CSSStylesKey.self] }
         set { self [CSSStylesKey.self] = newValue }
     }
 }
 
 private enum CSSStylesKey: EnvironmentKey {
-    static let defaultValue: CSSStyles = .init(styles: [])
+    static let defaultValue: [CSSStyle] = []
 }

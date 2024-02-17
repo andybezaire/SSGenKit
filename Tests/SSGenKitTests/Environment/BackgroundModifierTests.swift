@@ -11,7 +11,7 @@ final class BackgroundModifierTests: XCTestCase {
 
         assertInlineSnapshot(of: html, as: .lines) {
             """
-            <p style="background-color:black">
+            <p style="background-color:black;">
               Hello, World!
             </p>
             """
@@ -28,7 +28,7 @@ final class BackgroundModifierTests: XCTestCase {
 
             assertInlineSnapshot(of: html, as: .lines, message: "Snapshot did not match for color: \(color)") {
                 """
-                <p style="background-color:\(colorText)">
+                <p style="background-color:\(colorText);">
                   Hello, World!
                 </p>
                 """

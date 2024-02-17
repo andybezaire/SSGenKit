@@ -3,7 +3,7 @@ extension String {
         case html
         case head, title
         case body, p, h1, h2, h3, h4, h5, h6
-        case div(style: String)
+        case div(styles: [CSSStyle])
     }
 
     init(tag: HTMLTag, content: () -> HTMLElement) {
@@ -14,10 +14,10 @@ extension String {
                """
     }
 
-    init(font: HTMLBodyFont, styles: CSSStyles, content: () -> HTMLElement) {
-        guard !styles.styles.isEmpty else { self = .init(font: font, content: content) ; return }
+    init(font: HTMLBodyFont, styles: [CSSStyle], content: () -> HTMLElement) {
+        guard !styles.isEmpty else { self = .init(font: font, content: content) ; return }
 
-        let style = styles.styles.joined()
+        let style = styles.map(\.description).joined()
 
         self = """
                <\(font.htmlTag) style="\(style)">
@@ -91,8 +91,8 @@ extension String.HTMLTag {
             "h5"
         case .h6:
             "h6"
-        case let .div(style):
-            #"div style="\#(style)""#
+        case let .div(styles):
+            #"div style="\#(styles.map(\.description).joined())""#
         }
     }
 }

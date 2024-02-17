@@ -1,4 +1,6 @@
 public struct VStack {
+    @Environment(\.styles) private var styles
+
     private let content: () -> HTMLBodyElement
 
     public init(
@@ -11,7 +13,7 @@ public struct VStack {
 extension VStack: HTMLBodyElement {
     public var description: String {
         .init(
-            tag: .div(style: "align-items:center;display:flex;flex-direction:column;"),
+            tag: .div(styles: [.alignItems(.center), .display(.flex), .flexDirection(.column)]),
             content: content
         )
     }
