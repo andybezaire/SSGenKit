@@ -18,7 +18,10 @@ final class ExampleUseTests: XCTestCase {
 
     func test_helloWorld_matchesSnapshot() {
         let sut = WebPage(title: "Welcome, World!") {
-            Text("Hello, World!")
+            VStack {
+                Text("Hello, World!")
+                Text("Welcome to the great new World!")
+            }
         }
 
         let html = "\(sut)"
@@ -33,9 +36,14 @@ final class ExampleUseTests: XCTestCase {
                 </title>
               </head>
               <body>
-                <p>
-                  Hello, World!
-                </p>
+                <div style="display:flex;flex-direction:column;align-items:center;">
+                  <p>
+                    Hello, World!
+                  </p>
+                  <p>
+                    Welcome to the great new World!
+                  </p>
+                </div>
               </body>
             </html>
             """
