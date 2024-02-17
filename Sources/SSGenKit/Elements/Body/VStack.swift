@@ -1,3 +1,17 @@
+public struct VStack {
+    private let content: () -> HTMLBodyElement
+
+    public init(content: @escaping () -> HTMLBodyElement) {
+        self.content = content
+    }
+}
+
+extension VStack: HTMLBodyElement {
+    public var description: String {
+        #"<div style="display:flex;flex-direction:column;align-items:center;">#\#(content())</div>"#
+    }
+}
+
 //public struct VStack: HTMLBodyElement {
 //    @Environment(\.font) private var font
 //

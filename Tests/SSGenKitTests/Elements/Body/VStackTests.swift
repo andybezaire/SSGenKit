@@ -42,15 +42,19 @@ final class VStackTests: XCTestCase {
 
     // MARK: - snapshots
 //    func test_basic_matchesSnapshot() {
-//        let sut = Text("Hello, World!")
+//        let sut = VStack {
+//            Text("Hello, World!")
+//        }
 //
 //        let html = "\(sut)"
 //
 //        assertInlineSnapshot(of: html, as: .lines) {
 //            """
-//            <p>
-//              Hello, World!
-//            </p>
+//            <div style="display:flex;flex-direction:column;align-items:center;">
+//              <p>
+//                Hello, World!
+//              </p>
+//            </div>
 //            """
 //        }
 //    }
@@ -74,15 +78,5 @@ final class VStackTests: XCTestCase {
     private func makeSUT(content: String = "empty") -> HTMLBodyElement {
         let element = VStack { Text(content) }
         return element
-    }
-}
-
-struct VStack {
-    let content: () -> HTMLBodyElement
-}
-
-extension VStack: HTMLBodyElement {
-    var description: String {
-        #"<div style="display:flex;flex-direction:column;align-items:center;">#\#(content())</div>"#
     }
 }
