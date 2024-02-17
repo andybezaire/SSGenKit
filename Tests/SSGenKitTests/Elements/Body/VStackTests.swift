@@ -41,23 +41,23 @@ final class VStackTests: XCTestCase {
     }
 
     // MARK: - snapshots
-//    func test_basic_matchesSnapshot() {
-//        let sut = VStack {
-//            Text("Hello, World!")
-//        }
-//
-//        let html = "\(sut)"
-//
-//        assertInlineSnapshot(of: html, as: .lines) {
-//            """
-//            <div style="display:flex;flex-direction:column;align-items:center;">
-//              <p>
-//                Hello, World!
-//              </p>
-//            </div>
-//            """
-//        }
-//    }
+    func test_basic_matchesSnapshot() {
+        let sut = VStack {
+            Text("Hello, World!")
+        }
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <p>
+                Hello, World!
+              </p>
+            </div>
+            """
+        }
+    }
 
 //    func test_formatted_matchesSnapshot() {
 //        let sut = Text("Hello, World!")
