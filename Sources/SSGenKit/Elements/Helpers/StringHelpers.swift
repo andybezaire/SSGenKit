@@ -14,6 +14,18 @@ extension String {
                """
     }
 
+    init(font: HTMLBodyFont, styles: CSSStyles, content: () -> HTMLElement) {
+        guard !styles.styles.isEmpty else { self = .init(font: font, content: content) ; return }
+
+        let style = styles.styles.joined()
+
+        self = """
+               <\(font.htmlTag) style="\(style)">
+                 \(indented: "\(content())")
+               </\(font.htmlTag)>
+               """
+    }
+
     init(font: HTMLBodyFont, content: () -> HTMLElement) {
         self = """
                <\(font.htmlTag)>

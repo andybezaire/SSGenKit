@@ -1,5 +1,6 @@
 public struct Text: HTMLBodyElement {
     @Environment(\.font) private var font
+    @Environment(\.styles) private var styles
 
     private let content: String
 
@@ -8,6 +9,6 @@ public struct Text: HTMLBodyElement {
     }
 
     public var description: String {
-        .init(font: font, content: { content })
+        .init(font: font, styles: styles, content: { content })
     }
 }
