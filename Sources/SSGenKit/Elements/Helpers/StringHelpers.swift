@@ -2,8 +2,10 @@ extension String {
     enum HTMLTag {
         case html
         case head, title
-        case body, p, h1, h2, h3, h4, h5, h6
+        case body(styles: [CSSStyle]), p, h1, h2, h3, h4, h5, h6
         case div(styles: [CSSStyle])
+
+        static var body: HTMLTag { .body(styles: []) }
     }
 
     init(tag: HTMLTag, content: () -> HTMLElement) {
@@ -75,8 +77,8 @@ extension String.HTMLTag {
             "head"
         case .title:
             "title"
-        case .body:
-            "body"
+        case let .body(styles):
+            #"body style="\#(styles.map(\.description).sorted().joined())""#
         case .p:
             "p"
         case .h1:

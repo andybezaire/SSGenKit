@@ -12,7 +12,7 @@ final class HTMLTests: XCTestCase {
         assertInlineSnapshot(of: html, as: .lines) {
             """
             <html>
-              <body>
+              <body style="align-items:center;display:flex;flex-direction:column;">
                 <p>
                   This is the body.
                 </p>
@@ -35,7 +35,7 @@ final class HTMLTests: XCTestCase {
         assertInlineSnapshot(of: html, as: .lines) {
             """
             <html>
-              <body>
+              <body style="align-items:center;display:flex;flex-direction:column;">
                 <p>
                   This is the first line.
                 </p>
@@ -62,7 +62,7 @@ final class HTMLTests: XCTestCase {
               <head>
                 This is the head.
               </head>
-              <body>
+              <body style="align-items:center;display:flex;flex-direction:column;">
                 <p>
                   This is the body.
                 </p>

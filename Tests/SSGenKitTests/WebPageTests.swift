@@ -36,7 +36,7 @@ final class WebPageTests: XCTestCase {
 
         let html = "\(sut)"
 
-        let openIndex = try XCTUnwrap(html.index(of: "<body>"), "should have open tag but was missing")
+        let openIndex = try XCTUnwrap(html.index(of: "<body"), "should have open tag but was missing")
         let closeIndex = try XCTUnwrap(html.index(of: "</body>"), "should have close tag but was missing")
         let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
         let htmlCloseIndex = try XCTUnwrap(html.index(of: "</html>"))
@@ -53,7 +53,7 @@ final class WebPageTests: XCTestCase {
         let html = "\(sut)"
 
         let contentIndex = try XCTUnwrap(html.index(of: "\(content)"), "html: \(html) should contain \(content)")
-        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body>"))
+        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body"))
         let bodyCloseIndex = try XCTUnwrap(html.index(of: "</body>"))
 
         XCTAssertTrue(contentIndex > bodyOpenIndex, "content should be after body open")
@@ -69,7 +69,7 @@ final class WebPageTests: XCTestCase {
         let openIndex = try XCTUnwrap(html.index(of: "<head>"), "should have open tag but was missing")
         let closeIndex = try XCTUnwrap(html.index(of: "</head>"), "should have close tag but was missing")
         let htmlOpenIndex = try XCTUnwrap(html.index(of: "<html>"))
-        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body>"))
+        let bodyOpenIndex = try XCTUnwrap(html.index(of: "<body"))
 
         XCTAssertTrue(openIndex < closeIndex, "tag open should be before close")
         XCTAssertTrue(openIndex > htmlOpenIndex, "tag open should be after html open")
@@ -117,7 +117,7 @@ final class WebPageTests: XCTestCase {
             """
             <!DOCTYPE html>
             <html>
-              <body>
+              <body style="align-items:center;display:flex;flex-direction:column;">
                 <p>
                   This is a simple site.
                 </p>

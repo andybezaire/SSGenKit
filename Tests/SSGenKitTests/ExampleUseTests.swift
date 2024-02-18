@@ -79,7 +79,7 @@ final class ExampleUseTests: XCTestCase {
                   Welcome, World!
                 </title>
               </head>
-              <body>
+              <body style="align-items:center;display:flex;flex-direction:column;">
                 <div style="align-items:center;background-color:black;color:white;display:flex;flex-direction:column;">
                   <p>
                     Hello, World!
