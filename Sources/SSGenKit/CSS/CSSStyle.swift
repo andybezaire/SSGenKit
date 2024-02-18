@@ -4,6 +4,10 @@ enum CSSStyle {
     case color(Color)
     case display(DisplayStyle)
     case flexDirection(FlexDirectionStyle)
+
+    enum AlignItemsStyle { case center }
+    enum DisplayStyle { case flex }
+    enum FlexDirectionStyle { case column }
 }
 
 extension CSSStyle: CustomStringConvertible {
@@ -16,12 +20,6 @@ extension CSSStyle: CustomStringConvertible {
         case let .flexDirection(style): "flex-direction:\(style);"
         }
     }
-}
-
-extension CSSStyle {
-    enum AlignItemsStyle { case center }
-    enum DisplayStyle { case flex }
-    enum FlexDirectionStyle { case column }
 }
 
 extension CSSStyle {
