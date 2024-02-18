@@ -1,1 +1,1 @@
-public enum Color: CaseIterable { case black, white }
+public enum Color { case black, white }
