@@ -36,27 +36,4 @@ final class ForegroundStyleModifierTests: XCTestCase {
             """
         }
     }
-
-    // MARK: - helpers
 }
-
-//private typealias ColorPairTable = [Color: String]
-
-//private extension ColorPairTable {
-//    static func text(for color: Color) throws -> String {
-//        guard let text = colorPairTable[color]
-//        else { throw UnimplementedColorError(color: color) }
-//
-//        return text
-//    }
-//
-//    private static let colorPairTable: [Color: String] = [
-//        .black: "black",
-//        .white: "white",
-//    ]
-//
-//    private struct UnimplementedColorError: Error, CustomDebugStringConvertible {
-//        let color: Color
-//        var debugDescription: String { "Unimplemented for color: \(color)" }
-//    }
-//}
