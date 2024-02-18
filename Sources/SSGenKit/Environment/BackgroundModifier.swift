@@ -1,5 +1,5 @@
 extension HTMLBodyElement {
-    public func background(_ color: Color) -> HTMLBodyElement {
+    public func background(_ color: CSSColor) -> HTMLBodyElement {
         let styles = EnvironmentValues.current.styles
         return self
             .environment(\.styles, [.backgroundColor(color)] + styles)

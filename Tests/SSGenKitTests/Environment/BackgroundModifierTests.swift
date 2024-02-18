@@ -5,7 +5,7 @@ import InlineSnapshotTesting
 final class BackgroundModifierTests: XCTestCase {
     func test_text_html_matchesSnapshot() {
         let sut = Text("Hello, World!")
-            .background(Color.black)
+            .background(CSSColor.black)
 
         let html = "\(sut)"
 
@@ -22,7 +22,7 @@ final class BackgroundModifierTests: XCTestCase {
         let sut = VStack {
             Text("Hello, World!")
         }
-            .background(Color.black)
+            .background(CSSColor.black)
 
         let html = "\(sut)"
 

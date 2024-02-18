@@ -1,7 +1,7 @@
 enum CSSStyle {
     case alignItems(AlignItemsStyle)
-    case backgroundColor(Color)
-    case color(Color)
+    case backgroundColor(CSSColor)
+    case color(CSSColor)
     case display(DisplayStyle)
     case flexDirection(FlexDirectionStyle)
 

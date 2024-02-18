@@ -65,7 +65,7 @@ final class ExampleUseTests: XCTestCase {
                 Text("Welcome to the great new World!")
             }
 //            .foregroundStyle(.white)
-            .background(Color.black)
+            .background(CSSColor.black)
         }
 
         let html = "\(sut)"
