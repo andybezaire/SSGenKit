@@ -18,6 +18,13 @@ extension HTMLBodyElement {
     ) -> HTMLBodyElement {
         EnvironmentKeyWritingModifier(element: self, keyPath: keyPath, value: value)
     }
+
+    func environment<Value>(
+        _ keyPath: WritableKeyPath<EnvironmentValues, Array<Value>>,
+        appending value: Value
+    ) -> HTMLBodyElement {
+        EnvironmentKeyAppendingModifier(element: self, keyPath: keyPath, value: value)
+    }
 }
 
 struct EnvironmentValues {
@@ -51,6 +58,19 @@ struct EnvironmentKeyWritingModifier<Element, Value>: HTMLBodyElement where Elem
         let previous = EnvironmentValues.current
         defer { EnvironmentValues.current = previous }
         EnvironmentValues.current[keyPath: keyPath] = value
+        return "\(element)"
+    }
+}
+
+struct EnvironmentKeyAppendingModifier<Element, Value>: HTMLBodyElement where Element: HTMLBodyElement {
+    let element: Element
+    let keyPath: WritableKeyPath<EnvironmentValues, Array<Value>>
+    let value: Value
+
+    var description: String {
+        let previous = EnvironmentValues.current
+        defer { EnvironmentValues.current = previous }
+        EnvironmentValues.current[keyPath: keyPath].append(value)
         return "\(element)"
     }
 }

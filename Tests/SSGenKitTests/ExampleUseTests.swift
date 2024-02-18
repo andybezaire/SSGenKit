@@ -64,7 +64,7 @@ final class ExampleUseTests: XCTestCase {
                 Text("Hello, World!")
                 Text("Welcome to the great new World!")
             }
-//            .foregroundStyle(.white)
+            .foregroundStyle(.white)
             .background(CSSColor.black)
         }
 
@@ -80,7 +80,7 @@ final class ExampleUseTests: XCTestCase {
                 </title>
               </head>
               <body>
-                <div style="align-items:center;background-color:black;display:flex;flex-direction:column;">
+                <div style="align-items:center;background-color:black;color:white;display:flex;flex-direction:column;">
                   <p>
                     Hello, World!
                   </p>
