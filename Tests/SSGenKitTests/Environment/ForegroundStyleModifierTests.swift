@@ -18,42 +18,24 @@ final class ForegroundStyleModifierTests: XCTestCase {
         }
     }
 
-//    func test_allColors_html_matchesSnapshot() throws {
-//        try Color.allCases.forEach { color in
-//            let colorText = try ColorPairTable.text(for: color)
-//            let sut = Text("Hello, World!")
-//                .background(color)
-//
-//            let html = "\(sut)"
-//
-//            assertInlineSnapshot(of: html, as: .lines, message: "Snapshot did not match for color: \(color)") {
-//                """
-//                <p style="background-color:\(colorText);">
-//                  Hello, World!
-//                </p>
-//                """
-//            }
-//        }
-//    }
+    func test_vStack_html_matchesSnapshot() {
+        let sut = VStack {
+            Text("Hello, World!")
+        }
+            .foregroundStyle(.white)
 
-//    func test_vStack_html_matchesSnapshot() {
-//        let sut = VStack {
-//            Text("Hello, World!")
-//        }
-//            .background(Color.black)
-//
-//        let html = "\(sut)"
-//
-//        assertInlineSnapshot(of: html, as: .lines) {
-//            """
-//            <div style="align-items:center;background-color:black;display:flex;flex-direction:column;">
-//              <p>
-//                Hello, World!
-//              </p>
-//            </div>
-//            """
-//        }
-//    }
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <div style="align-items:center;color:white;display:flex;flex-direction:column;">
+              <p>
+                Hello, World!
+              </p>
+            </div>
+            """
+        }
+    }
 
     // MARK: - helpers
 }

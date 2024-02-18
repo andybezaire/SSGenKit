@@ -32,4 +32,13 @@ extension CSSStyle {
             false
         }
     }
+
+    var isColor: Bool {
+        switch self {
+        case .color:
+            true
+        default:
+            false
+        }
+    }
 }
