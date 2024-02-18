@@ -58,39 +58,39 @@ final class ExampleUseTests: XCTestCase {
 //        }
 //    }
 
-//    func test_helloWorld_matchesSnapshot() {
-//        let sut = WebPage(title: "Welcome, World!") {
-//            VStack {
-//                Text("Hello, World!")
-//                Text("Welcome to the great new World!")
-//            }
+    func test_helloWorld_matchesSnapshot() {
+        let sut = WebPage(title: "Welcome, World!") {
+            VStack {
+                Text("Hello, World!")
+                Text("Welcome to the great new World!")
+            }
 //            .foregroundStyle(.white)
-//            .background(Color.black)
-//        }
-//
-//        let html = "\(sut)"
-//
-//        assertInlineSnapshot(of: html, as: .lines) {
-//            """
-//            <!DOCTYPE html>
-//            <html>
-//              <head>
-//                <title>
-//                  Welcome, World!
-//                </title>
-//              </head>
-//              <body>
-//                <div style="align-items:center;display:flex;flex-direction:column;">
-//                  <p>
-//                    Hello, World!
-//                  </p>
-//                  <p>
-//                    Welcome to the great new World!
-//                  </p>
-//                </div>
-//              </body>
-//            </html>
-//            """
-//        }
-//    }
+            .background(Color.black)
+        }
+
+        let html = "\(sut)"
+
+        assertInlineSnapshot(of: html, as: .lines) {
+            """
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <title>
+                  Welcome, World!
+                </title>
+              </head>
+              <body>
+                <div style="align-items:center;background-color:black;display:flex;flex-direction:column;">
+                  <p>
+                    Hello, World!
+                  </p>
+                  <p>
+                    Welcome to the great new World!
+                  </p>
+                </div>
+              </body>
+            </html>
+            """
+        }
+    }
 }
