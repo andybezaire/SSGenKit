@@ -1,6 +1,7 @@
 enum CSSStyle {
     case alignItems(AlignItemsStyle)
     case backgroundColor(Color)
+    case color(Color)
     case display(DisplayStyle)
     case flexDirection(FlexDirectionStyle)
 }
@@ -10,6 +11,7 @@ extension CSSStyle: CustomStringConvertible {
         switch self {
         case let .alignItems(style): "align-items:\(style);"
         case let .backgroundColor(color): "background-color:\(color);"
+        case let .color(color): "color:\(color);"
         case let .display(style): "display:\(style);"
         case let .flexDirection(style): "flex-direction:\(style);"
         }

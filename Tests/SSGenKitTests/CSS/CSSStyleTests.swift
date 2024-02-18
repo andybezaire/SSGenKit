@@ -6,6 +6,8 @@ final class CSSStyleTests: XCTestCase {
         XCTAssertEqual("\(CSSStyle.alignItems(.center))","align-items:center;")
         XCTAssertEqual("\(CSSStyle.backgroundColor(.black))","background-color:black;")
         XCTAssertEqual("\(CSSStyle.backgroundColor(.white))","background-color:white;")
+        XCTAssertEqual("\(CSSStyle.color(.black))","color:black;")
+        XCTAssertEqual("\(CSSStyle.color(.white))","color:white;")
         XCTAssertEqual("\(CSSStyle.display(.flex))","display:flex;")
         XCTAssertEqual("\(CSSStyle.flexDirection(.column))","flex-direction:column;")
     }
